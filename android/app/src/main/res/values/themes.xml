@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme for Compose -->
+    <style name="Theme.EventPassUG" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/primary</item>
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_light</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/background_light</item>
+        <item name="android:navigationBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.EventPassUG.Splash" parent="Theme.EventPassUG">
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+</resources>

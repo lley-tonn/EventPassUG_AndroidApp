@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- EventPass Logo - Ticket/Pass Icon -->
+    <group
+        android:translateX="27"
+        android:translateY="27">
+        <!-- Ticket background -->
+        <path
+            android:fillColor="#FFFF7A00"
+            android:pathData="M48,8L6,8C3.79,8 2,9.79 2,12L2,20.5C4.76,20.5 7,22.74 7,25.5C7,28.26 4.76,30.5 2,30.5L2,39C2,41.21 3.79,43 6,43L48,43C50.21,43 52,41.21 52,39L52,30.5C49.24,30.5 47,28.26 47,25.5C47,22.74 49.24,20.5 52,20.5L52,12C52,9.79 50.21,8 48,8z"/>
+        <!-- EP text -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M12,17L12,34L16,34L16,27L22,27L22,23L16,23L16,21L22,21L22,17L12,17zM26,17L26,34L30,34L30,29L34,29C37.31,29 40,26.31 40,23C40,19.69 37.31,17 34,17L26,17zM30,21L34,21C35.1,21 36,21.9 36,23C36,24.1 35.1,25 34,25L30,25L30,21z"/>
+    </group>
+</vector>

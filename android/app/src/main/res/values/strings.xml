@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EventPass UG</string>
+    <string name="app_tagline">Discover Amazing Events</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_title_1">Discover Events</string>
+    <string name="onboarding_desc_1">Find the best events happening around you</string>
+    <string name="onboarding_title_2">Book Instantly</string>
+    <string name="onboarding_desc_2">Secure your tickets in seconds with Mobile Money or card</string>
+    <string name="onboarding_title_3">Easy Check-in</string>
+    <string name="onboarding_desc_3">Show your QR code at the venue for hassle-free entry</string>
+
+    <!-- Auth -->
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_sign_up">Sign Up</string>
+    <string name="auth_sign_out">Sign Out</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm Password</string>
+    <string name="auth_full_name">Full Name</string>
+    <string name="auth_phone_number">Phone Number</string>
+    <string name="auth_enter_otp">Enter OTP</string>
+    <string name="auth_verify">Verify</string>
+    <string name="auth_resend_otp">Resend OTP</string>
+    <string name="auth_continue_with_google">Continue with Google</string>
+    <string name="auth_continue_with_phone">Continue with Phone</string>
+    <string name="auth_continue_with_email">Continue with Email</string>
+    <string name="auth_or">or</string>
+    <string name="auth_forgot_password">Forgot Password?</string>
+    <string name="auth_reset_password">Reset Password</string>
+    <string name="auth_send_reset_link">Send Reset Link</string>
+    <string name="auth_dont_have_account">Don\'t have an account?</string>
+    <string name="auth_already_have_account">Already have an account?</string>
+    <string name="auth_terms_agreement">By continuing, you agree to our Terms of Service and Privacy Policy</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_tickets">Tickets</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_scanner">Scanner</string>
+    <string name="nav_back">Back</string>
+
+    <!-- Events -->
+    <string name="events_featured">Featured Events</string>
+    <string name="events_happening_now">Happening Now</string>
+    <string name="events_nearby">Nearby</string>
+    <string name="events_sold_out">Sold Out</string>
+    <string name="events_view_all">View All</string>
+    <string name="events_buy_tickets">Buy Tickets</string>
+    <string name="events_select_tickets">Select Tickets</string>
+    <string name="events_recommended">Recommended for You</string>
+    <string name="events_trending">Trending</string>
+    <string name="events_this_week">This Week</string>
+    <string name="events_this_weekend">This Weekend</string>
+    <string name="events_free">Free Events</string>
+    <string name="events_details">Event Details</string>
+    <string name="events_about">About this Event</string>
+    <string name="events_location">Location</string>
+    <string name="events_date_time">Date &amp; Time</string>
+    <string name="events_organizer">Organizer</string>
+    <string name="events_share">Share Event</string>
+    <string name="events_like">Like</string>
+    <string name="events_liked">Liked</string>
+    <string name="events_age_restricted">18+ Event</string>
+    <string name="events_limited_tickets">Limited Tickets Available</string>
+    <string name="events_almost_sold_out">Almost Sold Out</string>
+    <string name="events_no_events_found">No events found</string>
+
+    <!-- Categories -->
+    <string name="category_all">All</string>
+    <string name="category_music">Music</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_arts">Arts</string>
+    <string name="category_food">Food &amp; Drink</string>
+    <string name="category_technology">Technology</string>
+    <string name="category_business">Business</string>
+    <string name="category_comedy">Comedy</string>
+    <string name="category_theatre">Theatre</string>
+    <string name="category_film">Film</string>
+    <string name="category_fashion">Fashion</string>
+    <string name="category_wellness">Wellness</string>
+    <string name="category_charity">Charity</string>
+    <string name="category_other">Other</string>
+
+    <!-- Tickets -->
+    <string name="tickets_my_tickets">My Tickets</string>
+    <string name="tickets_upcoming">Upcoming</string>
+    <string name="tickets_past">Past</string>
+    <string name="tickets_all">All Tickets</string>
+    <string name="tickets_show_qr">Show QR Code</string>
+    <string name="tickets_purchase">Purchase Tickets</string>
+    <string name="tickets_checkout">Checkout</string>
+    <string name="tickets_quantity">Quantity</string>
+    <string name="tickets_total">Total</string>
+    <string name="tickets_free">Free</string>
+    <string name="tickets_vip">VIP</string>
+    <string name="tickets_general">General Admission</string>
+    <string name="tickets_early_bird">Early Bird</string>
+    <string name="tickets_download">Download Ticket</string>
+    <string name="tickets_add_to_wallet">Add to Wallet</string>
+    <string name="tickets_transfer">Transfer Ticket</string>
+    <string name="tickets_no_tickets">No tickets yet</string>
+    <string name="tickets_purchase_success">Purchase Successful!</string>
+    <string name="tickets_check_in">Check In</string>
+    <string name="tickets_checked_in">Checked In</string>
+
+    <!-- Profile -->
+    <string name="profile_edit">Edit Profile</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_notifications">Notifications</string>
+    <string name="profile_payment_methods">Payment Methods</string>
+    <string name="profile_help">Help Center</string>
+    <string name="profile_privacy">Privacy Policy</string>
+    <string name="profile_terms">Terms of Use</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_dark_mode">Dark Mode</string>
+    <string name="profile_account">Account</string>
+    <string name="profile_delete_account">Delete Account</string>
+    <string name="profile_followers">Followers</string>
+    <string name="profile_following">Following</string>
+    <string name="profile_events_attended">Events Attended</string>
+    <string name="profile_verified">Verified</string>
+
+    <!-- Organizer -->
+    <string name="organizer_become">Become an Organizer</string>
+    <string name="organizer_dashboard">Dashboard</string>
+    <string name="organizer_create_event">Create Event</string>
+    <string name="organizer_manage_events">Manage Events</string>
+    <string name="organizer_scan_tickets">Scan Tickets</string>
+    <string name="organizer_analytics">Analytics</string>
+    <string name="organizer_revenue">Revenue</string>
+    <string name="organizer_tickets_sold">Tickets Sold</string>
+    <string name="organizer_attendees">Attendees</string>
+    <string name="organizer_total_events">Total Events</string>
+    <string name="organizer_export_data">Export Data</string>
+    <string name="organizer_switch_to_attendee">Switch to Attendee Mode</string>
+    <string name="organizer_scan_success">Ticket Validated!</string>
+    <string name="organizer_scan_invalid">Invalid Ticket</string>
+    <string name="organizer_scan_already_used">Ticket Already Used</string>
+
+    <!-- Scanner -->
+    <string name="scanner_point_camera">Point camera at QR code</string>
+    <string name="scanner_scanning">Scanning…</string>
+    <string name="scanner_flash_on">Flash On</string>
+    <string name="scanner_flash_off">Flash Off</string>
+    <string name="scanner_manual_entry">Manual Entry</string>
+
+    <!-- Payment -->
+    <string name="payment_mobile_money">Mobile Money</string>
+    <string name="payment_card">Card</string>
+    <string name="payment_airtel_money">Airtel Money</string>
+    <string name="payment_mtn_momo">MTN MoMo</string>
+    <string name="payment_processing">Processing Payment…</string>
+    <string name="payment_success">Payment Successful</string>
+    <string name="payment_failed">Payment Failed</string>
+    <string name="payment_retry">Retry Payment</string>
+
+    <!-- Time -->
+    <string name="time_today">Today</string>
+    <string name="time_tomorrow">Tomorrow</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_days_ago">%d days ago</string>
+    <string name="time_hours_left">%d hours left</string>
+    <string name="time_minutes_left">%d minutes left</string>
+    <string name="time_ending_soon">Ending Soon</string>
+    <string name="time_starts_in">Starts in %s</string>
+
+    <!-- Common -->
+    <string name="loading">Loading…</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="done">Done</string>
+    <string name="continue_text">Continue</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="search">Search</string>
+    <string name="search_events">Search events…</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="apply">Apply</string>
+    <string name="clear">Clear</string>
+    <string name="clear_all">Clear All</string>
+    <string name="see_more">See More</string>
+    <string name="see_less">See Less</string>
+    <string name="no_results">No results found</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="try_again">Try Again</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="refresh">Refresh</string>
+
+    <!-- Accessibility -->
+    <string name="cd_logo">EventPass Logo</string>
+    <string name="cd_back">Go back</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_menu">Menu</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_notifications">Notifications</string>
+    <string name="cd_profile_picture">Profile picture</string>
+    <string name="cd_event_image">Event image</string>
+    <string name="cd_qr_code">QR Code</string>
+
+    <!-- Currency -->
+    <string name="currency_ugx">UGX</string>
+    <string name="currency_format">UGX %,d</string>
+</resources>

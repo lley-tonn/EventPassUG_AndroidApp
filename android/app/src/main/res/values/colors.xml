@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Brand Colors -->
+    <color name="primary">#FFFF7A00</color>
+    <color name="primary_dark">#FFE66D00</color>
+    <color name="primary_light">#FFFFA040</color>
+
+    <!-- Role Colors -->
+    <color name="attendee_primary">#FFFF7A00</color>
+    <color name="organizer_primary">#FF6366F1</color>
+
+    <!-- Secondary Colors (Light Theme) -->
+    <color name="secondary_container">#FFE0E1FF</color>
+    <color name="on_secondary_container">#FF1D1B4B</color>
+
+    <!-- Secondary Colors (Dark Theme) -->
+    <color name="secondary_dark">#FFA5A7FF</color>
+    <color name="on_secondary_dark">#FF2E2D5E</color>
+    <color name="secondary_container_dark">#FF454477</color>
+    <color name="on_secondary_container_dark">#FFE0E1FF</color>
+
+    <!-- Tertiary Colors (Dark Theme) -->
+    <color name="tertiary_dark">#FFB3C5FF</color>
+    <color name="on_tertiary_dark">#FF002A76</color>
+
+    <!-- Status Colors -->
+    <color name="success">#FF22C55E</color>
+    <color name="warning">#FFF59E0B</color>
+    <color name="error">#FFEF4444</color>
+    <color name="info">#FF3B82F6</color>
+
+    <!-- Error Colors (Dark Theme) -->
+    <color name="error_dark">#FFFFB4AB</color>
+    <color name="on_error_dark">#FF690005</color>
+    <color name="error_container">#FFFFDAD6</color>
+    <color name="on_error_container">#FF410002</color>
+    <color name="error_container_dark">#FF93000A</color>
+    <color name="on_error_container_dark">#FFFFDAD6</color>
+
+    <!-- Special Colors -->
+    <color name="happening_now">#FF7CFC66</color>
+    <color name="premium">#FFFFD700</color>
+    <color name="sold_out">#FF9CA3AF</color>
+
+    <!-- Neutral Colors -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="gray_50">#FFFAFAFA</color>
+    <color name="gray_100">#FFF4F4F5</color>
+    <color name="gray_200">#FFE4E4E7</color>
+    <color name="gray_300">#FFD4D4D8</color>
+    <color name="gray_400">#FFA1A1AA</color>
+    <color name="gray_500">#FF71717A</color>
+    <color name="gray_600">#FF52525B</color>
+    <color name="gray_700">#FF3F3F46</color>
+    <color name="gray_800">#FF27272A</color>
+    <color name="gray_900">#FF18181B</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#FFFAFAFA</color>
+    <color name="background_dark">#FF121212</color>
+    <color name="surface_light">#FFFFFFFF</color>
+    <color name="surface_dark">#FF1E1E1E</color>
+    <color name="card_light">#FFFFFFFF</color>
+    <color name="card_dark">#FF2D2D2D</color>
+
+    <!-- Transparent Colors -->
+    <color name="transparent">#00000000</color>
+    <color name="scrim">#80000000</color>
+    <color name="overlay_light">#1A000000</color>
+    <color name="overlay_dark">#1AFFFFFF</color>
+</resources>

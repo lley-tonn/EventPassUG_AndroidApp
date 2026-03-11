@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing_xxs">2dp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+    <dimen name="spacing_xxxl">64dp</dimen>
+
+    <!-- Semantic Spacing -->
+    <dimen name="spacing_compact">6dp</dimen>
+    <dimen name="spacing_section">24dp</dimen>
+    <dimen name="spacing_item">12dp</dimen>
+    <dimen name="spacing_edge">16dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="corner_radius_xs">4dp</dimen>
+    <dimen name="corner_radius_sm">8dp</dimen>
+    <dimen name="corner_radius_md">12dp</dimen>
+    <dimen name="corner_radius_lg">16dp</dimen>
+    <dimen name="corner_radius_xl">24dp</dimen>
+
+    <!-- Button Dimensions -->
+    <dimen name="button_height_large">56dp</dimen>
+    <dimen name="button_height_medium">48dp</dimen>
+    <dimen name="button_height_small">36dp</dimen>
+    <dimen name="button_height_compact">32dp</dimen>
+    <dimen name="button_padding_horizontal">24dp</dimen>
+    <dimen name="button_padding_vertical">12dp</dimen>
+
+    <!-- Input Dimensions -->
+    <dimen name="input_height">52dp</dimen>
+    <dimen name="input_height_compact">44dp</dimen>
+    <dimen name="input_padding_horizontal">16dp</dimen>
+
+    <!-- Icon Sizes -->
+    <dimen name="icon_xs">12dp</dimen>
+    <dimen name="icon_sm">16dp</dimen>
+    <dimen name="icon_md">20dp</dimen>
+    <dimen name="icon_lg">24dp</dimen>
+    <dimen name="icon_xl">32dp</dimen>
+    <dimen name="icon_xxl">48dp</dimen>
+
+    <!-- Card Dimensions -->
+    <dimen name="card_poster_height">200dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+
+    <!-- Accessibility -->
+    <dimen name="minimum_touch_target">44dp</dimen>
+</resources>
