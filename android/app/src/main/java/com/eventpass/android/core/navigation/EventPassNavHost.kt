@@ -16,8 +16,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,11 +35,12 @@ import androidx.navigation.compose.rememberNavController
 import com.eventpass.android.features.attendee.home.AttendeeHomeScreen
 import com.eventpass.android.features.attendee.search.SearchScreen
 import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
-import com.eventpass.android.features.auth.AuthChoiceScreen
 import com.eventpass.android.features.auth.AuthViewModel
-import com.eventpass.android.features.auth.LoginScreen
-import com.eventpass.android.features.auth.SignUpScreen
 import com.eventpass.android.features.common.profile.ProfileScreen
+import com.eventpass.feature.auth.navigation.AuthRoutes
+import com.eventpass.feature.auth.screens.AuthChoiceScreen
+import com.eventpass.feature.auth.screens.LoginScreen
+import com.eventpass.feature.auth.screens.SignUpScreen
 import com.eventpass.feature.onboarding.navigation.OnboardingRoutes
 import com.eventpass.feature.onboarding.navigation.onboardingGraph
 
@@ -54,7 +59,7 @@ fun EventPassNavHost(
     // Determine start destination based on auth state
     val startDestination = when {
         !hasCompletedOnboarding -> OnboardingRoutes.GRAPH
-        !authState.isAuthenticated -> NavRoutes.AuthChoice.route
+        !authState.isAuthenticated -> AuthRoutes.CHOICE
         else -> NavRoutes.MainTabs.route
     }
 
@@ -66,50 +71,81 @@ fun EventPassNavHost(
         onboardingGraph(navController) { _ ->
             // TODO(phase-2): persist onboarding answers to the real preferences repo
             authViewModel.completeOnboarding()
-            navController.navigate(NavRoutes.AuthChoice.route) {
+            navController.navigate(AuthRoutes.CHOICE) {
                 popUpTo(OnboardingRoutes.GRAPH) { inclusive = true }
             }
         }
 
         // Auth Choice
-        composable(NavRoutes.AuthChoice.route) {
+        composable(AuthRoutes.CHOICE) {
             AuthChoiceScreen(
-                onLoginClick = {
-                    navController.navigate("login")
+                onSignIn = { navController.navigate(AuthRoutes.LOGIN) },
+                onHostEvents = {
+                    // TODO(phase-2): route to organizer onboarding / verification
+                    navController.navigate(AuthRoutes.SIGN_UP)
                 },
-                onSignUpClick = {
-                    navController.navigate("signup")
-                },
-                onContinueAsGuest = {
+                onBrowseAsGuest = {
                     navController.navigate(NavRoutes.MainTabs.route) {
-                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                        popUpTo(AuthRoutes.CHOICE) { inclusive = true }
                     }
                 }
             )
         }
 
         // Login
-        composable("login") {
-            LoginScreen(
-                onBackClick = { navController.popBackStack() },
-                onLoginSuccess = {
+        composable(AuthRoutes.LOGIN) {
+            var email by rememberSaveable { mutableStateOf("") }
+            var password by rememberSaveable { mutableStateOf("") }
+
+            LaunchedEffect(authState.isAuthenticated) {
+                if (authState.isAuthenticated) {
                     navController.navigate(NavRoutes.MainTabs.route) {
-                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                        popUpTo(AuthRoutes.CHOICE) { inclusive = true }
                     }
-                },
-                onForgotPassword = { /* TODO */ }
+                }
+            }
+
+            LoginScreen(
+                email = email,
+                password = password,
+                onEmailChange = { email = it },
+                onPasswordChange = { password = it },
+                onSubmit = { authViewModel.signInWithEmail(email, password) },
+                onBack = { navController.popBackStack() },
+                onForgotPassword = { /* TODO(phase-2) */ },
+                isLoading = authState.isLoading,
+                errorText = authState.error
             )
         }
 
         // Sign Up
-        composable("signup") {
-            SignUpScreen(
-                onBackClick = { navController.popBackStack() },
-                onSignUpSuccess = {
+        composable(AuthRoutes.SIGN_UP) {
+            var fullName by rememberSaveable { mutableStateOf("") }
+            var email by rememberSaveable { mutableStateOf("") }
+            var password by rememberSaveable { mutableStateOf("") }
+            var confirmPassword by rememberSaveable { mutableStateOf("") }
+
+            LaunchedEffect(authState.isAuthenticated) {
+                if (authState.isAuthenticated) {
                     navController.navigate(NavRoutes.MainTabs.route) {
-                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                        popUpTo(AuthRoutes.CHOICE) { inclusive = true }
                     }
                 }
+            }
+
+            SignUpScreen(
+                fullName = fullName,
+                email = email,
+                password = password,
+                confirmPassword = confirmPassword,
+                onFullNameChange = { fullName = it },
+                onEmailChange = { email = it },
+                onPasswordChange = { password = it },
+                onConfirmPasswordChange = { confirmPassword = it },
+                onSubmit = { authViewModel.signUpWithEmail(email, password, fullName) },
+                onBack = { navController.popBackStack() },
+                isLoading = authState.isLoading,
+                errorText = authState.error
             )
         }
 
@@ -270,7 +306,7 @@ fun MainTabsScreen(
                     },
                     onSignOut = {
                         // Navigate back to auth choice
-                        rootNavController.navigate(NavRoutes.AuthChoice.route) {
+                        rootNavController.navigate(AuthRoutes.CHOICE) {
                             popUpTo(NavRoutes.MainTabs.route) { inclusive = true }
                         }
                     }
