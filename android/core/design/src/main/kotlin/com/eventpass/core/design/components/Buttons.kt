@@ -99,7 +99,7 @@ private fun buttonColors(variant: ButtonVariant, enabled: Boolean): BtnColors {
         !enabled -> BtnColors(disabledBg, disabledFg, null)
         variant == ButtonVariant.Primary -> BtnColors(EventPassColors.Primary, EventPassColors.White, null)
         variant == ButtonVariant.Secondary -> BtnColors(
-            bg = MaterialTheme.colorScheme.surface,
+            bg = EventPassColors.BackgroundLight,
             fg = EventPassColors.Ink,
             border = null
         )
