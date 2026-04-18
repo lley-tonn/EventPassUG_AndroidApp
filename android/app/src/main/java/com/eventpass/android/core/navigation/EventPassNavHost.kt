@@ -36,7 +36,8 @@ import com.eventpass.android.features.auth.AuthViewModel
 import com.eventpass.android.features.auth.LoginScreen
 import com.eventpass.android.features.auth.SignUpScreen
 import com.eventpass.android.features.common.profile.ProfileScreen
-import com.eventpass.android.features.onboarding.OnboardingScreen
+import com.eventpass.feature.onboarding.navigation.OnboardingRoutes
+import com.eventpass.feature.onboarding.navigation.onboardingGraph
 
 /**
  * Main navigation host for the app.
@@ -52,7 +53,7 @@ fun EventPassNavHost(
 
     // Determine start destination based on auth state
     val startDestination = when {
-        !hasCompletedOnboarding -> NavRoutes.Onboarding.route
+        !hasCompletedOnboarding -> OnboardingRoutes.GRAPH
         !authState.isAuthenticated -> NavRoutes.AuthChoice.route
         else -> NavRoutes.MainTabs.route
     }
@@ -61,16 +62,13 @@ fun EventPassNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        // Onboarding
-        composable(NavRoutes.Onboarding.route) {
-            OnboardingScreen(
-                onComplete = {
-                    authViewModel.completeOnboarding()
-                    navController.navigate(NavRoutes.AuthChoice.route) {
-                        popUpTo(NavRoutes.Onboarding.route) { inclusive = true }
-                    }
-                }
-            )
+        // Onboarding — 6-step flow in its own nested graph (see :feature:onboarding)
+        onboardingGraph(navController) { _ ->
+            // TODO(phase-2): persist onboarding answers to the real preferences repo
+            authViewModel.completeOnboarding()
+            navController.navigate(NavRoutes.AuthChoice.route) {
+                popUpTo(OnboardingRoutes.GRAPH) { inclusive = true }
+            }
         }
 
         // Auth Choice

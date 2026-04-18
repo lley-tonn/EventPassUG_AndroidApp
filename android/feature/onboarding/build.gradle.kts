@@ -1,6 +1,7 @@
 plugins {
     id("eventpass.android.library")
     id("eventpass.android.compose")
+    id("eventpass.android.hilt")
 }
 
 android {
@@ -13,6 +14,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.navigation.compose)
 }
