@@ -1,11 +1,9 @@
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt.android)
-    alias(libs.plugins.ksp)
+    id("eventpass.android.application")
+    id("eventpass.android.compose")
+    id("eventpass.android.hilt")
 }
 
 // Load local.properties
@@ -18,12 +16,9 @@ val localProperties = Properties().apply {
 
 android {
     namespace = "com.eventpass.android"
-    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.eventpass.android"
-        minSdk = 24
-        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
 
@@ -33,8 +28,14 @@ android {
             useSupportLibrary = true
         }
 
-        // Manifest placeholders
         manifestPlaceholders["MAPS_API_KEY"] = localProperties.getProperty("MAPS_API_KEY", "")
+
+        // Mock repos on by default in debug; real backend in release.
+        buildConfigField(
+            "boolean",
+            "USE_MOCK_REPOS",
+            localProperties.getProperty("USE_MOCK_REPOS", "true")
+        )
     }
 
     buildTypes {
@@ -50,20 +51,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("boolean", "USE_MOCK_REPOS", "false")
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
-        compose = true
         buildConfig = true
     }
 
@@ -75,6 +67,21 @@ android {
 }
 
 dependencies {
+    // Modules
+    implementation(project(":core:common"))
+    implementation(project(":core:design"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    // Feature shells (wired up as features migrate in)
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:auth"))
+    implementation(project(":feature:attendee"))
+    implementation(project(":feature:organizer"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:become-organizer"))
+    implementation(project(":feature:notifications"))
+
     // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -82,25 +89,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
 
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.material.icons.extended)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
     // Navigation
     implementation(libs.androidx.navigation.compose)
-
-    // Hilt Dependency Injection
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    // Room Database
+    // Room (app owns the DB instance for now; will move to :core:data)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
@@ -128,12 +121,11 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.play.services.pay)
 
-    // Firebase (uncomment when ready)
-    // implementation(platform(libs.firebase.bom))
-    // implementation(libs.firebase.auth)
-    // implementation(libs.firebase.messaging)
-    // implementation(libs.firebase.analytics)
+    // Maps Compose
+    implementation(libs.maps.compose)
+    implementation(libs.maps.compose.utils)
 
     // CameraX
     implementation(libs.camerax.core)
