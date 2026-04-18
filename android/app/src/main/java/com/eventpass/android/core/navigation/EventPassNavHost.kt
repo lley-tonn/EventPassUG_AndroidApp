@@ -1,14 +1,41 @@
 package com.eventpass.android.core.navigation
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ConfirmationNumber
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.ConfirmationNumber
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.eventpass.android.features.attendee.home.AttendeeHomeScreen
+import com.eventpass.android.features.attendee.search.SearchScreen
+import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
+import com.eventpass.android.features.auth.AuthChoiceScreen
 import com.eventpass.android.features.auth.AuthViewModel
+import com.eventpass.android.features.auth.LoginScreen
+import com.eventpass.android.features.auth.SignUpScreen
+import com.eventpass.android.features.common.profile.ProfileScreen
 import com.eventpass.android.features.onboarding.OnboardingScreen
 
 /**
@@ -48,8 +75,44 @@ fun EventPassNavHost(
 
         // Auth Choice
         composable(NavRoutes.AuthChoice.route) {
-            // TODO: AuthChoiceScreen
-            // Placeholder - will be implemented when migrating Auth feature
+            AuthChoiceScreen(
+                onLoginClick = {
+                    navController.navigate("login")
+                },
+                onSignUpClick = {
+                    navController.navigate("signup")
+                },
+                onContinueAsGuest = {
+                    navController.navigate(NavRoutes.MainTabs.route) {
+                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        // Login
+        composable("login") {
+            LoginScreen(
+                onBackClick = { navController.popBackStack() },
+                onLoginSuccess = {
+                    navController.navigate(NavRoutes.MainTabs.route) {
+                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                    }
+                },
+                onForgotPassword = { /* TODO */ }
+            )
+        }
+
+        // Sign Up
+        composable("signup") {
+            SignUpScreen(
+                onBackClick = { navController.popBackStack() },
+                onSignUpSuccess = {
+                    navController.navigate(NavRoutes.MainTabs.route) {
+                        popUpTo(NavRoutes.AuthChoice.route) { inclusive = true }
+                    }
+                }
+            )
         }
 
         // Main Tabs
@@ -79,7 +142,7 @@ fun EventPassNavHost(
 
         // Profile
         composable(NavRoutes.Profile.route) {
-            // TODO: ProfileScreen()
+            ProfileScreen()
         }
 
         // Edit Profile
@@ -92,6 +155,16 @@ fun EventPassNavHost(
 }
 
 /**
+ * Bottom navigation tab item data.
+ */
+private data class BottomNavItem(
+    val route: String,
+    val label: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
+)
+
+/**
  * Main tabs screen with bottom navigation.
  * Role-aware: shows different tabs for Attendee vs Organizer.
  */
@@ -99,6 +172,112 @@ fun EventPassNavHost(
 fun MainTabsScreen(
     rootNavController: NavHostController
 ) {
-    // TODO: Implement with BottomNavigation
-    // Will include role switching logic like iOS MainTabView
+    val tabNavController = rememberNavController()
+
+    val bottomNavItems = listOf(
+        BottomNavItem(
+            route = "tab_home",
+            label = "Home",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home
+        ),
+        BottomNavItem(
+            route = "tab_search",
+            label = "Search",
+            selectedIcon = Icons.Filled.Search,
+            unselectedIcon = Icons.Outlined.Search
+        ),
+        BottomNavItem(
+            route = "tab_tickets",
+            label = "Tickets",
+            selectedIcon = Icons.Filled.ConfirmationNumber,
+            unselectedIcon = Icons.Outlined.ConfirmationNumber
+        ),
+        BottomNavItem(
+            route = "tab_profile",
+            label = "Profile",
+            selectedIcon = Icons.Filled.Person,
+            unselectedIcon = Icons.Outlined.Person
+        )
+    )
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                val navBackStackEntry by tabNavController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
+
+                bottomNavItems.forEach { item ->
+                    val selected = currentDestination?.hierarchy?.any { it.route == item.route } == true
+
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                                contentDescription = item.label
+                            )
+                        },
+                        label = { Text(item.label) },
+                        selected = selected,
+                        onClick = {
+                            tabNavController.navigate(item.route) {
+                                popUpTo(tabNavController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        NavHost(
+            navController = tabNavController,
+            startDestination = "tab_home",
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("tab_home") {
+                AttendeeHomeScreen(
+                    onSearchClick = {
+                        tabNavController.navigate("tab_search")
+                    },
+                    onEventClick = { eventId ->
+                        rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
+                    }
+                )
+            }
+
+            composable("tab_search") {
+                SearchScreen(
+                    onEventClick = { eventId ->
+                        rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
+                    }
+                )
+            }
+
+            composable("tab_tickets") {
+                MyTicketsScreen(
+                    onTicketClick = { ticketId ->
+                        rootNavController.navigate(NavRoutes.TicketDetail.createRoute(ticketId))
+                    }
+                )
+            }
+
+            composable("tab_profile") {
+                ProfileScreen(
+                    onEditProfile = {
+                        rootNavController.navigate(NavRoutes.EditProfile.route)
+                    },
+                    onSignOut = {
+                        // Navigate back to auth choice
+                        rootNavController.navigate(NavRoutes.AuthChoice.route) {
+                            popUpTo(NavRoutes.MainTabs.route) { inclusive = true }
+                        }
+                    }
+                )
+            }
+        }
+    }
 }
