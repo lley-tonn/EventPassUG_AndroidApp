@@ -5,11 +5,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.ConfirmationNumber
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -33,7 +31,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.eventpass.android.features.attendee.home.AttendeeHomeScreen
-import com.eventpass.android.features.attendee.search.SearchScreen
 import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
 import com.eventpass.android.features.auth.AuthViewModel
 import com.eventpass.android.features.common.profile.ProfileScreen
@@ -216,12 +213,6 @@ fun MainTabsScreen(
             unselectedIcon = Icons.Outlined.Home
         ),
         BottomNavItem(
-            route = "tab_search",
-            label = "Search",
-            selectedIcon = Icons.Filled.Search,
-            unselectedIcon = Icons.Outlined.Search
-        ),
-        BottomNavItem(
             route = "tab_tickets",
             label = "Tickets",
             selectedIcon = Icons.Filled.ConfirmationNumber,
@@ -274,14 +265,6 @@ fun MainTabsScreen(
         ) {
             composable("tab_home") {
                 AttendeeHomeScreen(
-                    onEventClick = { eventId ->
-                        rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
-                    }
-                )
-            }
-
-            composable("tab_search") {
-                SearchScreen(
                     onEventClick = { eventId ->
                         rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
                     }
