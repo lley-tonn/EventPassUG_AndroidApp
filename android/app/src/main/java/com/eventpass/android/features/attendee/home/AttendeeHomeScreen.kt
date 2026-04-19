@@ -25,12 +25,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eventpass.android.domain.models.Event
 import com.eventpass.feature.attendee.home.AttendeeHomeScreen as AttendeeHomeContent
 import com.eventpass.feature.attendee.home.EventCardData
 import com.eventpass.feature.attendee.home.components.CategoryItem
+import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -38,10 +41,13 @@ import java.time.format.DateTimeFormatter
 /**
  * :app-side wrapper — owns the VM + domain mapping, delegates UI to
  * `:feature:attendee`'s stateless [AttendeeHomeContent].
+ *
+ * Search is inline (no navigation): this wrapper owns the active/query state,
+ * debounces the query by ~300ms, and fuzzy-filters the already-loaded event
+ * list before handing it to the UI.
  */
 @Composable
 fun AttendeeHomeScreen(
-    onSearchClick: () -> Unit = {},
     onFavoritesClick: () -> Unit = {},
     onNotificationsClick: () -> Unit = {},
     onEventClick: (String) -> Unit = {},
@@ -55,9 +61,27 @@ fun AttendeeHomeScreen(
     val categories = remember { defaultHomeCategories() }
     val today = remember { LocalDate.now() }
 
-    val events = when (val s = eventsState) {
-        is com.eventpass.android.core.state.UiState.Success -> s.data.map(Event::toCardData)
+    val allEvents: List<Event> = when (val s = eventsState) {
+        is com.eventpass.android.core.state.UiState.Success -> s.data
         else -> emptyList()
+    }
+
+    var isSearchActive by remember { mutableStateOf(false) }
+    var searchQuery by remember { mutableStateOf("") }
+    var debouncedQuery by remember { mutableStateOf("") }
+
+    LaunchedEffect(searchQuery) {
+        delay(300)
+        debouncedQuery = searchQuery
+    }
+
+    val displayedEvents: List<EventCardData> = remember(allEvents, debouncedQuery, isSearchActive) {
+        val source = if (isSearchActive && debouncedQuery.isNotBlank()) {
+            allEvents.filter { it.matchesQuery(debouncedQuery) }
+        } else {
+            allEvents
+        }
+        source.map(Event::toCardData)
     }
 
     AttendeeHomeContent(
@@ -66,9 +90,17 @@ fun AttendeeHomeScreen(
         unreadCount = 0,
         categories = categories,
         selectedCategoryId = null,
-        events = events,
+        events = displayedEvents,
         favoritedIds = uiState.likedEventIds,
-        onSearchClick = onSearchClick,
+        isSearchActive = isSearchActive,
+        searchQuery = searchQuery,
+        onSearchActivate = { isSearchActive = true },
+        onSearchQueryChange = { searchQuery = it },
+        onSearchCancel = {
+            searchQuery = ""
+            debouncedQuery = ""
+            isSearchActive = false
+        },
         onFavoritesClick = onFavoritesClick,
         onNotificationsClick = onNotificationsClick,
         onCategorySelect = { /* TODO: map to VM filters */ },
@@ -91,6 +123,39 @@ private fun Event.toCardData(): EventCardData = EventCardData(
     rating = rating.takeIf { it > 0 },
     ratingCount = totalRatings.takeIf { it > 0 }
 )
+
+/**
+ * Token-wise fuzzy match over the fields attendees search by: title,
+ * category name, venue name, venue city. Each whitespace-separated token in
+ * the query must either appear as a substring (partial match) or be found as
+ * a subsequence in at least one haystack field (typo tolerance — "musik" hits
+ * "music", "cncrt" hits "concert").
+ */
+private fun Event.matchesQuery(raw: String): Boolean {
+    val tokens = raw.trim().lowercase().split(Regex("\\s+")).filter { it.isNotEmpty() }
+    if (tokens.isEmpty()) return true
+    val haystacks = listOf(
+        title.lowercase(),
+        category.displayName.lowercase(),
+        venue.name.lowercase(),
+        venue.city.lowercase()
+    )
+    return tokens.all { token ->
+        haystacks.any { it.contains(token) || isSubsequence(token, it) }
+    }
+}
+
+private fun isSubsequence(needle: String, haystack: String): Boolean {
+    if (needle.isEmpty()) return true
+    var i = 0
+    for (c in haystack) {
+        if (c == needle[i]) {
+            i++
+            if (i == needle.length) return true
+        }
+    }
+    return false
+}
 
 private fun greetingFor(now: LocalDateTime, name: String?): String {
     val label = when (now.hour) {

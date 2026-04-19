@@ -274,9 +274,6 @@ fun MainTabsScreen(
         ) {
             composable("tab_home") {
                 AttendeeHomeScreen(
-                    onSearchClick = {
-                        tabNavController.navigate("tab_search")
-                    },
                     onEventClick = { eventId ->
                         rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
                     }
