@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -65,7 +64,6 @@ fun AttendeeHomeScreen(
         modifier = modifier
             .fillMaxSize()
             .background(EventPassColors.BackgroundLight)
-            .statusBarsPadding()
     ) {
         HomeHeader(
             dateLabel = dateLabel,
@@ -87,6 +85,7 @@ fun AttendeeHomeScreen(
         Spacer(Modifier.height(Spacing.lg))
 
         LazyColumn(
+            modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(
                 start = Spacing.xl,
                 end = Spacing.xl,

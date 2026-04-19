@@ -1,11 +1,26 @@
 package com.eventpass.android.features.attendee.home
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DirectionsRun
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Celebration
+import androidx.compose.material.icons.filled.Computer
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.MicExternalOn
+import androidx.compose.material.icons.filled.ModeNight
+import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.Movie
+import androidx.compose.material.icons.filled.Museum
 import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.Restaurant
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.TheaterComedy
 import androidx.compose.material.icons.filled.Today
+import androidx.compose.material.icons.filled.VolunteerActivism
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -93,5 +108,20 @@ private fun defaultHomeCategories() = listOf(
     CategoryItem("week", "This week", Icons.Filled.DateRange),
     CategoryItem("month", "This month", Icons.Filled.CalendarMonth),
     CategoryItem("music", "Music", Icons.Filled.MusicNote),
-    CategoryItem("arts", "Arts & Culture", Icons.Filled.Brush)
+    CategoryItem("arts", "Arts & Culture", Icons.Filled.Brush),
+    CategoryItem("concerts", "Concerts", Icons.Filled.MicExternalOn),
+    CategoryItem("sports", "Sports & Wellness", Icons.AutoMirrored.Filled.DirectionsRun),
+    CategoryItem("tech", "Technology", Icons.Filled.Computer),
+    CategoryItem("fundraising", "Fundraising", Icons.Filled.VolunteerActivism),
+    CategoryItem("comedy", "Comedy", Icons.Filled.TheaterComedy),
+    CategoryItem("poetry", "Poetry", Icons.AutoMirrored.Filled.MenuBook),
+    CategoryItem("drama", "Drama", Icons.Filled.Movie),
+    CategoryItem("exhibitions", "Exhibitions", Icons.Filled.Museum),
+    CategoryItem("networking", "Networking", Icons.Filled.Groups),
+    CategoryItem("education", "Education", Icons.Filled.School),
+    CategoryItem("food", "Food & Drinks", Icons.Filled.Restaurant),
+    CategoryItem("nightlife", "Nightlife", Icons.Filled.ModeNight),
+    CategoryItem("festivals", "Festivals", Icons.Filled.Celebration),
+    CategoryItem("wellness", "Wellness", Icons.Filled.Favorite),
+    CategoryItem("other", "Others", Icons.Filled.MoreHoriz)
 )
