@@ -32,6 +32,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.eventpass.android.features.attendee.home.AttendeeHomeScreen
 import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
+import com.eventpass.android.features.attendee.tickets.TicketDetailScreen
 import com.eventpass.android.features.auth.AuthViewModel
 import com.eventpass.android.features.common.profile.ProfileScreen
 import com.eventpass.feature.auth.navigation.AuthRoutes
@@ -166,9 +167,8 @@ fun EventPassNavHost(
         }
 
         // Ticket Detail
-        composable(NavRoutes.TicketDetail.route) { backStackEntry ->
-            val ticketId = backStackEntry.arguments?.getString("ticketId") ?: return@composable
-            // TODO: TicketDetailScreen(ticketId = ticketId)
+        composable(NavRoutes.TicketDetail.route) {
+            TicketDetailScreen(onDone = { navController.popBackStack() })
         }
 
         // Profile
