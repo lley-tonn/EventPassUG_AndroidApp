@@ -35,6 +35,7 @@ import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
 import com.eventpass.android.features.attendee.tickets.TicketDetailScreen
 import com.eventpass.android.features.auth.AuthViewModel
 import com.eventpass.android.features.common.profile.ProfileScreen
+import com.eventpass.android.features.organizer.BecomeOrganizerScreen
 import com.eventpass.feature.auth.navigation.AuthRoutes
 import com.eventpass.feature.auth.screens.AuthChoiceScreen
 import com.eventpass.feature.auth.screens.LoginScreen
@@ -176,6 +177,14 @@ fun EventPassNavHost(
             ProfileScreen()
         }
 
+        // Become an Organizer — Step 1 of 5: Profile Completion
+        composable(NavRoutes.BecomeOrganizer.route) {
+            BecomeOrganizerScreen(
+                onCancel = { navController.popBackStack() },
+                onContinue = { /* TODO: Step 2 of 5 */ }
+            )
+        }
+
         // Edit Profile
         composable(NavRoutes.EditProfile.route) {
             // TODO: EditProfileScreen()
@@ -283,6 +292,9 @@ fun MainTabsScreen(
                 ProfileScreen(
                     onEditProfile = {
                         rootNavController.navigate(NavRoutes.EditProfile.route)
+                    },
+                    onBecomeOrganizer = {
+                        rootNavController.navigate(NavRoutes.BecomeOrganizer.route)
                     },
                     onSignOut = {
                         // Navigate back to auth choice
