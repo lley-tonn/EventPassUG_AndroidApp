@@ -2,9 +2,11 @@ package com.eventpass.android.core.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.BarChart
 import androidx.compose.material.icons.outlined.ConfirmationNumber
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -31,11 +33,29 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.eventpass.android.features.attendee.home.AttendeeHomeScreen
+import com.eventpass.android.features.attendee.search.SearchRoute
 import com.eventpass.android.features.attendee.tickets.MyTicketsScreen
 import com.eventpass.android.features.attendee.tickets.TicketDetailScreen
 import com.eventpass.android.features.auth.AuthViewModel
+import com.eventpass.android.features.common.profile.AddPhoneRoute
+import com.eventpass.android.features.common.profile.ChangeEmailRoute
+import com.eventpass.android.features.common.profile.EditProfileRoute
+import com.eventpass.android.features.common.profile.EmailVerificationRoute
+import com.eventpass.android.features.common.profile.NationalIdVerificationRoute
 import com.eventpass.android.features.common.profile.ProfileScreen
+import com.eventpass.android.features.common.profile.ProfileViewModel
+import com.eventpass.android.features.common.profile.VerifyPhoneRoute
+import com.eventpass.android.features.organizer.BecomeOrganizerContactScreen
+import com.eventpass.android.features.organizer.BecomeOrganizerIdentityScreen
+import com.eventpass.android.features.organizer.BecomeOrganizerPayoutScreen
 import com.eventpass.android.features.organizer.BecomeOrganizerScreen
+import com.eventpass.android.features.organizer.BecomeOrganizerTermsScreen
+import com.eventpass.android.features.organizer.CreateEventFlow
+import com.eventpass.android.features.organizer.OrganizerDashboardScreen
+import com.eventpass.android.features.organizer.OrganizerHomeRoute
+import com.eventpass.android.features.organizer.ScanTicketRoute
+import com.eventpass.android.features.organizer.ScannerDevicesRoute
+import com.eventpass.android.domain.models.UserRole
 import com.eventpass.feature.auth.navigation.AuthRoutes
 import com.eventpass.feature.auth.screens.AuthChoiceScreen
 import com.eventpass.feature.auth.screens.LoginScreen
@@ -181,13 +201,142 @@ fun EventPassNavHost(
         composable(NavRoutes.BecomeOrganizer.route) {
             BecomeOrganizerScreen(
                 onCancel = { navController.popBackStack() },
-                onContinue = { /* TODO: Step 2 of 5 */ }
+                onVerifyEmail = { navController.navigate(NavRoutes.EmailVerification.route) },
+                onVerifyPhone = { navController.navigate(NavRoutes.VerifyPhone.route) },
+                onAddPhoto = { navController.navigate(NavRoutes.EditProfile.route) },
+                onContinue = { navController.navigate(NavRoutes.BecomeOrganizerIdentity.route) }
+            )
+        }
+
+        // Become an Organizer — Step 2 of 5: Identity Verification
+        composable(NavRoutes.BecomeOrganizerIdentity.route) {
+            BecomeOrganizerIdentityScreen(
+                onCancel = {
+                    navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
+                },
+                onChooseDocument = { navController.navigate(NavRoutes.NationalIDVerification.route) },
+                onBack = { navController.popBackStack() },
+                onContinue = { navController.navigate(NavRoutes.BecomeOrganizerContact.route) }
+            )
+        }
+
+        // Become an Organizer — Step 3 of 5: Contact Information
+        composable(NavRoutes.BecomeOrganizerContact.route) {
+            BecomeOrganizerContactScreen(
+                onCancel = {
+                    navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
+                },
+                onBack = { navController.popBackStack() },
+                onContinue = { navController.navigate(NavRoutes.BecomeOrganizerPayout.route) }
+            )
+        }
+
+        // Become an Organizer — Step 4 of 5: Payout Setup
+        composable(NavRoutes.BecomeOrganizerPayout.route) {
+            BecomeOrganizerPayoutScreen(
+                onCancel = {
+                    navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
+                },
+                onBack = { navController.popBackStack() },
+                onContinue = { navController.navigate(NavRoutes.BecomeOrganizerTerms.route) }
+            )
+        }
+
+        // Become an Organizer — Step 5 of 5: Terms Agreement
+        composable(NavRoutes.BecomeOrganizerTerms.route) {
+            BecomeOrganizerTermsScreen(
+                onCancel = {
+                    navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
+                },
+                onBack = { navController.popBackStack() },
+                onComplete = {
+                    // TODO: submit organizer application + switch to organizer role
+                    navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
+                }
+            )
+        }
+
+        // National ID / Passport verification (from profile + organizer identity step)
+        composable(NavRoutes.NationalIDVerification.route) {
+            NationalIdVerificationRoute(
+                onCancel = { navController.popBackStack() },
+                onSubmitted = { navController.popBackStack() }
             )
         }
 
         // Edit Profile
         composable(NavRoutes.EditProfile.route) {
-            // TODO: EditProfileScreen()
+            EditProfileRoute(
+                onBack = { navController.popBackStack() },
+                onChangePhoto = { /* TODO: photo picker */ },
+                onChangeEmail = { navController.navigate(NavRoutes.ChangeEmail.route) },
+                onAddPhone = { navController.navigate(NavRoutes.AddPhone.route) }
+            )
+        }
+
+        // Change Email
+        composable(NavRoutes.ChangeEmail.route) {
+            ChangeEmailRoute(
+                onCancel = { navController.popBackStack() },
+                onUpdated = { navController.popBackStack() }
+            )
+        }
+
+        // Add Phone Number
+        composable(NavRoutes.AddPhone.route) {
+            AddPhoneRoute(
+                onCancel = { navController.popBackStack() },
+                onAdded = {
+                    navController.popBackStack()
+                    navController.navigate(NavRoutes.VerifyPhone.route)
+                }
+            )
+        }
+
+        // Email Verification
+        composable(NavRoutes.EmailVerification.route) {
+            EmailVerificationRoute(
+                onDone = { navController.popBackStack() }
+            )
+        }
+
+        // Verify Phone Number
+        composable(NavRoutes.VerifyPhone.route) {
+            VerifyPhoneRoute(
+                onCancel = { navController.popBackStack() },
+                onVerified = { navController.popBackStack() }
+            )
+        }
+
+        // Create Event (3-step wizard)
+        composable(NavRoutes.CreateEvent.route) {
+            CreateEventFlow(
+                onClose = { navController.popBackStack() },
+                onPublished = { navController.popBackStack() }
+            )
+        }
+
+        // Search
+        composable(NavRoutes.Search.route) {
+            SearchRoute(
+                onClose = { navController.popBackStack() },
+                onResultClick = { eventId ->
+                    navController.navigate(NavRoutes.EventDetails.createRoute(eventId))
+                }
+            )
+        }
+
+        // Scanner Devices (event picker)
+        composable(NavRoutes.ScannerDevices.route) {
+            ScannerDevicesRoute(
+                onBack = { navController.popBackStack() },
+                onEventClick = { /* TODO: per-event scanner management */ }
+            )
+        }
+
+        // Scan Ticket (QR camera)
+        composable(NavRoutes.ScanTicket.route) {
+            ScanTicketRoute(onCancel = { navController.popBackStack() })
         }
 
         // Add more routes as features are migrated...
@@ -210,9 +359,30 @@ private data class BottomNavItem(
  */
 @Composable
 fun MainTabsScreen(
-    rootNavController: NavHostController
+    rootNavController: NavHostController,
+    profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     val tabNavController = rememberNavController()
+
+    val user by profileViewModel.currentUser.collectAsState()
+    val isOrganizer = user?.currentActiveRole == UserRole.ORGANIZER
+
+    // Middle tab is role-aware: Dashboard for organizers, Tickets for attendees.
+    val middleItem = if (isOrganizer) {
+        BottomNavItem(
+            route = "tab_dashboard",
+            label = "Dashboard",
+            selectedIcon = Icons.Filled.BarChart,
+            unselectedIcon = Icons.Outlined.BarChart
+        )
+    } else {
+        BottomNavItem(
+            route = "tab_tickets",
+            label = "Tickets",
+            selectedIcon = Icons.Filled.ConfirmationNumber,
+            unselectedIcon = Icons.Outlined.ConfirmationNumber
+        )
+    }
 
     val bottomNavItems = listOf(
         BottomNavItem(
@@ -221,12 +391,7 @@ fun MainTabsScreen(
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home
         ),
-        BottomNavItem(
-            route = "tab_tickets",
-            label = "Tickets",
-            selectedIcon = Icons.Filled.ConfirmationNumber,
-            unselectedIcon = Icons.Outlined.ConfirmationNumber
-        ),
+        middleItem,
         BottomNavItem(
             route = "tab_profile",
             label = "Profile",
@@ -273,11 +438,23 @@ fun MainTabsScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable("tab_home") {
-                AttendeeHomeScreen(
-                    onEventClick = { eventId ->
-                        rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
-                    }
-                )
+                if (isOrganizer) {
+                    OrganizerHomeRoute(
+                        greeting = "Good evening, ${user?.firstName ?: "there"}!",
+                        onCreateEvent = { rootNavController.navigate(NavRoutes.CreateEvent.route) },
+                        onSearch = { rootNavController.navigate(NavRoutes.Search.route) },
+                        onNotifications = { /* TODO: notifications */ },
+                        onEventClick = { eventId ->
+                            rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
+                        }
+                    )
+                } else {
+                    AttendeeHomeScreen(
+                        onEventClick = { eventId ->
+                            rootNavController.navigate(NavRoutes.EventDetails.createRoute(eventId))
+                        }
+                    )
+                }
             }
 
             composable("tab_tickets") {
@@ -288,6 +465,15 @@ fun MainTabsScreen(
                 )
             }
 
+            composable("tab_dashboard") {
+                OrganizerDashboardScreen(
+                    onCreateEvent = { rootNavController.navigate(NavRoutes.CreateEvent.route) },
+                    onScanTickets = { rootNavController.navigate(NavRoutes.ScanTicket.route) },
+                    onManageScanners = { rootNavController.navigate(NavRoutes.ScannerDevices.route) }
+                    // TODO: onWithdraw / onViewInsights / onMore
+                )
+            }
+
             composable("tab_profile") {
                 ProfileScreen(
                     onEditProfile = {
@@ -295,6 +481,9 @@ fun MainTabsScreen(
                     },
                     onBecomeOrganizer = {
                         rootNavController.navigate(NavRoutes.BecomeOrganizer.route)
+                    },
+                    onVerifyNationalId = {
+                        rootNavController.navigate(NavRoutes.NationalIDVerification.route)
                     },
                     onSignOut = {
                         // Navigate back to auth choice

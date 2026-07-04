@@ -58,8 +58,14 @@ sealed class NavRoutes(val route: String) {
         fun createRoute(eventId: String) = "qr_scanner/$eventId"
     }
     object BecomeOrganizer : NavRoutes("become_organizer")
+    object BecomeOrganizerIdentity : NavRoutes("become_organizer_identity")
+    object BecomeOrganizerContact : NavRoutes("become_organizer_contact")
+    object BecomeOrganizerPayout : NavRoutes("become_organizer_payout")
+    object BecomeOrganizerTerms : NavRoutes("become_organizer_terms")
 
     // Scanner Routes
+    object ScannerDevices : NavRoutes("scanner_devices")
+    object ScanTicket : NavRoutes("scan_ticket")
     object PairScanner : NavRoutes("pair_scanner/{eventId}") {
         fun createRoute(eventId: String) = "pair_scanner/$eventId"
     }

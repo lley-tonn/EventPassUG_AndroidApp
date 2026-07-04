@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,6 +43,10 @@ sealed interface ProfileRowTrailing {
     data class IconOnly(val icon: ImageVector) : ProfileRowTrailing
     /** Plain right-aligned value text (no chevron). */
     data class Value(val text: String) : ProfileRowTrailing
+    /** Right-aligned value text followed by a chevron (e.g. "To Attendee ›"). */
+    data class ValueChevron(val text: String) : ProfileRowTrailing
+    /** Green filled circle with a white check — used for verified contact rows. */
+    data object SuccessCheck : ProfileRowTrailing
     /** Nothing on the right. */
     data object None : ProfileRowTrailing
 }
@@ -129,6 +134,34 @@ private fun TrailingAffordance(trailing: ProfileRowTrailing, titleColor: Color) 
             style = MaterialTheme.typography.bodyMedium,
             color = EventPassColors.InkMuted
         )
+        is ProfileRowTrailing.ValueChevron -> Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = trailing.text,
+                style = MaterialTheme.typography.bodyMedium,
+                color = EventPassColors.InkMuted
+            )
+            Spacer(Modifier.width(Spacing.xs))
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                tint = EventPassColors.InkSubtle,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        ProfileRowTrailing.SuccessCheck -> Box(
+            modifier = Modifier
+                .size(24.dp)
+                .clip(CircleShape)
+                .background(EventPassColors.Success),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Check,
+                contentDescription = null,
+                tint = EventPassColors.White,
+                modifier = Modifier.size(15.dp)
+            )
+        }
         ProfileRowTrailing.None -> {}
     }
 }

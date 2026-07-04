@@ -38,6 +38,8 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.SwapHoriz
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -66,7 +68,14 @@ data class ProfileHeaderData(
     val avatarUrl: String?,
     val email: String?,
     val phoneNumber: String?,
-    val versionText: String
+    val versionText: String,
+    val isVerified: Boolean = false,
+    val followerCount: Int = 0,
+    val isEmailVerified: Boolean = false,
+    val isPhoneVerified: Boolean = false,
+    val isVerifiedOrganizer: Boolean = false,
+    val verifiedOnText: String? = null,
+    val switchRoleTargetLabel: String? = null
 )
 
 /**
@@ -81,6 +90,7 @@ fun ProfileScreen(
     data: ProfileHeaderData,
     onVerifyNationalId: () -> Unit,
     onBecomeOrganizer: () -> Unit,
+    onSwitchRole: () -> Unit,
     onAddEmail: () -> Unit,
     onAddPhone: () -> Unit,
     onLinkAccounts: () -> Unit,
@@ -110,52 +120,81 @@ fun ProfileScreen(
 
         SectionLabel("Account")
         GroupedCard {
-            ProfileRow(
-                icon = Icons.Filled.VerifiedUser,
-                title = "Verify National ID (Optional)",
-                onClick = onVerifyNationalId
-            )
-            ProfileRowDivider()
-            ProfileRow(
-                icon = Icons.Filled.BusinessCenter,
-                title = "Become an Organizer",
-                subtitle = "Host events and sell tickets",
-                onClick = onBecomeOrganizer
-            )
+            if (data.isVerifiedOrganizer) {
+                ProfileRow(
+                    icon = Icons.Filled.VerifiedUser,
+                    title = "Verified Organizer",
+                    subtitle = data.verifiedOnText?.let { "Verified on $it" },
+                    onClick = { /* no-op */ },
+                    iconTint = EventPassColors.Success,
+                    trailing = ProfileRowTrailing.None
+                )
+                ProfileRowDivider()
+                ProfileRow(
+                    icon = Icons.Filled.SwapHoriz,
+                    title = "Switch Role",
+                    onClick = onSwitchRole,
+                    trailing = data.switchRoleTargetLabel
+                        ?.let { ProfileRowTrailing.ValueChevron(it) }
+                        ?: ProfileRowTrailing.Chevron
+                )
+            } else {
+                ProfileRow(
+                    icon = Icons.Filled.VerifiedUser,
+                    title = "Verify National ID (Optional)",
+                    onClick = onVerifyNationalId
+                )
+                ProfileRowDivider()
+                ProfileRow(
+                    icon = Icons.Filled.BusinessCenter,
+                    title = "Become an Organizer",
+                    subtitle = "Host events and sell tickets",
+                    onClick = onBecomeOrganizer
+                )
+            }
         }
 
         Spacer(Modifier.height(Spacing.lg))
 
         SectionLabel("Contact Information")
         GroupedCard {
+            val emailVerified = data.email != null && data.isEmailVerified
+            val phoneVerified = data.phoneNumber != null && data.isPhoneVerified
+
             ProfileRow(
                 icon = Icons.Filled.Email,
-                title = data.email ?: "Add Email Address",
-                subtitle = if (data.email != null) "Email" else null,
+                title = if (emailVerified) "Email Verified" else (data.email ?: "Add Email Address"),
+                subtitle = if (emailVerified) data.email else if (data.email != null) "Email" else null,
                 onClick = onAddEmail,
-                trailing = if (data.email == null)
-                    ProfileRowTrailing.AddPlus
-                else
-                    ProfileRowTrailing.Chevron
+                iconTint = if (emailVerified) EventPassColors.Success else EventPassColors.Primary,
+                trailing = when {
+                    emailVerified -> ProfileRowTrailing.SuccessCheck
+                    data.email == null -> ProfileRowTrailing.AddPlus
+                    else -> ProfileRowTrailing.Chevron
+                }
             )
             ProfileRowDivider()
             ProfileRow(
                 icon = Icons.Filled.Phone,
-                title = data.phoneNumber ?: "Add Phone Number",
-                subtitle = if (data.phoneNumber != null) "Phone" else null,
+                title = if (phoneVerified) "Phone Verified" else (data.phoneNumber ?: "Add Phone Number"),
+                subtitle = if (phoneVerified) data.phoneNumber else if (data.phoneNumber != null) "Phone" else null,
                 onClick = onAddPhone,
-                trailing = if (data.phoneNumber == null)
-                    ProfileRowTrailing.AddPlus
-                else
-                    ProfileRowTrailing.Chevron
+                iconTint = if (phoneVerified) EventPassColors.Success else EventPassColors.Primary,
+                trailing = when {
+                    phoneVerified -> ProfileRowTrailing.SuccessCheck
+                    data.phoneNumber == null -> ProfileRowTrailing.AddPlus
+                    else -> ProfileRowTrailing.Chevron
+                }
             )
-            ProfileRowDivider()
-            ProfileRow(
-                icon = Icons.Filled.VerifiedUser,
-                title = "Link Accounts",
-                subtitle = "Add more sign-in options",
-                onClick = onLinkAccounts
-            )
+            if (!(emailVerified && phoneVerified)) {
+                ProfileRowDivider()
+                ProfileRow(
+                    icon = Icons.Filled.VerifiedUser,
+                    title = "Link Accounts",
+                    subtitle = "Add more sign-in options",
+                    onClick = onLinkAccounts
+                )
+            }
         }
 
         Spacer(Modifier.height(Spacing.lg))
@@ -272,31 +311,69 @@ private fun ProfileHeader(data: ProfileHeaderData) {
             modifier = Modifier
                 .size(56.dp)
                 .clip(CircleShape)
-                .background(EventPassColors.PrimarySoft),
+                .background(EventPassColors.Primary),
             contentAlignment = Alignment.Center
         ) {
             // TODO: render Coil AsyncImage when avatarUrl != null
             Icon(
                 imageVector = Icons.Filled.Person,
                 contentDescription = null,
-                tint = EventPassColors.Primary,
+                tint = EventPassColors.White,
                 modifier = Modifier.size(32.dp)
             )
         }
         Spacer(Modifier.width(Spacing.md))
         Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = data.fullName,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
-                color = EventPassColors.Ink,
-                maxLines = 1
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = "★ ${data.roleLabel}",
-                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = EventPassColors.Primary
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = data.fullName,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
+                    color = EventPassColors.Ink,
+                    maxLines = 1,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+                if (data.isVerified) {
+                    Spacer(Modifier.width(Spacing.xs))
+                    Icon(
+                        imageVector = Icons.Filled.Verified,
+                        contentDescription = "Verified",
+                        tint = EventPassColors.Success,
+                        modifier = Modifier.size(22.dp)
+                    )
+                }
+            }
+            Spacer(Modifier.height(4.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Filled.Group,
+                    contentDescription = null,
+                    tint = EventPassColors.InkMuted,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(Modifier.width(Spacing.xs))
+                Text(
+                    text = "${data.followerCount} followers",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = EventPassColors.InkMuted
+                )
+                Text(
+                    text = "  •  ",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = EventPassColors.InkSubtle
+                )
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = null,
+                    tint = EventPassColors.Primary,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(Modifier.width(2.dp))
+                Text(
+                    text = data.roleLabel,
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                    color = EventPassColors.Primary
+                )
+            }
         }
     }
 }

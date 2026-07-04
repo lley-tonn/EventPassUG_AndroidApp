@@ -1,26 +1,19 @@
 package com.eventpass.feature.becomeorganizer
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.Icon
@@ -38,10 +31,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.eventpass.core.design.tokens.EventPassColors
-import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 import com.eventpass.feature.becomeorganizer.components.ChecklistRow
 import com.eventpass.feature.becomeorganizer.components.ChecklistStatus
+import com.eventpass.feature.becomeorganizer.components.OrganizerFooter
+import com.eventpass.feature.becomeorganizer.components.OrganizerTopBar
 import com.eventpass.feature.becomeorganizer.components.StepConnector
 
 /**
@@ -87,7 +81,7 @@ fun ProfileCompletionScreen(
             .background(EventPassColors.White)
             .statusBarsPadding()
     ) {
-        TopBar(onCancel = onCancel)
+        OrganizerTopBar(onCancel = onCancel)
 
         StepConnector(
             totalSteps = 5,
@@ -159,44 +153,12 @@ fun ProfileCompletionScreen(
             Spacer(Modifier.height(Spacing.xl))
         }
 
-        Footer(
-            enabled = requiredComplete,
+        OrganizerFooter(
+            primaryLabel = "Continue",
+            onPrimary = { if (requiredComplete) onContinue() else showError = true },
+            primaryEnabled = requiredComplete,
             showError = showError && !requiredComplete,
-            onContinue = {
-                if (requiredComplete) onContinue() else showError = true
-            }
-        )
-    }
-}
-
-// MARK: - Top bar
-
-@Composable
-private fun TopBar(onCancel: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.lg, vertical = Spacing.sm),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .clip(Radii.Pill)
-                .background(EventPassColors.BackgroundLight)
-                .clickable(onClick = onCancel)
-                .padding(horizontal = Spacing.lg, vertical = Spacing.sm)
-        ) {
-            Text(
-                text = "Cancel",
-                style = MaterialTheme.typography.titleMedium,
-                color = EventPassColors.Ink
-            )
-        }
-        Spacer(Modifier.width(Spacing.md))
-        Text(
-            text = "Become an Organizer",
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            color = EventPassColors.Ink
+            errorText = "Please complete all required fields to continue"
         )
     }
 }
@@ -222,62 +184,5 @@ private fun ProfileBadge() {
                 .background(EventPassColors.White)
                 .padding(2.dp)
         )
-    }
-}
-
-// MARK: - Footer
-
-@Composable
-private fun Footer(
-    enabled: Boolean,
-    showError: Boolean,
-    onContinue: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.lg, vertical = Spacing.md)
-            .navigationBarsPadding()
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 56.dp)
-                .clip(Radii.Button)
-                .background(
-                    if (enabled) EventPassColors.Primary
-                    else EventPassColors.OutlineLight.copy(alpha = 0.7f)
-                )
-                .clickable(onClick = onContinue),
-            contentAlignment = Alignment.Center
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Continue",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = EventPassColors.White
-                )
-                Spacer(Modifier.width(Spacing.sm))
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = null,
-                    tint = EventPassColors.White,
-                    modifier = Modifier.size(18.dp)
-                )
-            }
-        }
-        if (showError) {
-            Spacer(Modifier.height(Spacing.md))
-            Text(
-                text = "Please complete all required fields to continue",
-                style = MaterialTheme.typography.bodyMedium,
-                color = EventPassColors.Error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
     }
 }
