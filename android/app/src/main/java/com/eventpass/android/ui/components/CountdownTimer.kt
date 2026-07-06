@@ -46,9 +46,8 @@ enum class CountdownStyle {
 
 /**
  * Sales countdown timer component.
- * Migrated from iOS UI/Components/SalesCountdownTimer.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - Timer.publish → LaunchedEffect with delay
  * - @State private var timeRemaining → remember { mutableLongStateOf }
  * - .onAppear/.onDisappear → LaunchedEffect lifecycle

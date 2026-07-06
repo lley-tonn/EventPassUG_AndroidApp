@@ -17,7 +17,7 @@ import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * iOS-style modal header used across the profile / contact-verification sheets.
+ * modal header used across the profile / contact-verification sheets.
  *
  * Left: optional "Cancel" pill. Center: bold [title]. Right: optional action
  * pill (e.g. Save / Update / Done) that greys out when [actionEnabled] is false.

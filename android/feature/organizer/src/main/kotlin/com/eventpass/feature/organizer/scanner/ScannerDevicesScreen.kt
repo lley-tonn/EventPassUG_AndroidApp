@@ -45,7 +45,7 @@ data class ScannerEvent(
 )
 
 /**
- * Scanner Devices (iOS reference IMG_2807). An event picker — the organizer
+ * Scanner Devices (design reference IMG_2807). An event picker — the organizer
  * chooses an event to manage its authorized scanning devices.
  */
 @Composable

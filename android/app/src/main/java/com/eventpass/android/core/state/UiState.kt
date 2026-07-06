@@ -3,8 +3,8 @@ package com.eventpass.android.core.state
 /**
  * Generic UI State wrapper for async operations.
  *
- * SwiftUI → Compose state mapping:
- * - Swift enum AuthState { case idle, loading, success, error(String) }
+ * State mapping:
+ * - enum AuthState { case idle, loading, success, error(String) }
  * - Kotlin sealed class UiState<T>
  *
  * This provides a consistent pattern for handling loading, success, and error states.

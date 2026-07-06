@@ -4,7 +4,7 @@ package com.eventpass.android.features.auth
  * Form state for authentication screens.
  * Handles input values and validation errors.
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - @Published var email = "" → MutableStateFlow<AuthFormState>
  * - var emailError: String? → Included in data class
  */

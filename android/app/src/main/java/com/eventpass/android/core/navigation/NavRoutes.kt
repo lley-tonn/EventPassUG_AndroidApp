@@ -2,7 +2,7 @@ package com.eventpass.android.core.navigation
 
 /**
  * Navigation route definitions for the app.
- * Mirrors the iOS navigation structure.
+ * Mirrors the app navigation structure.
  */
 sealed class NavRoutes(val route: String) {
 

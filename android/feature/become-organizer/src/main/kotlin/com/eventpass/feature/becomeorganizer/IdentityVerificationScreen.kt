@@ -53,7 +53,7 @@ import com.eventpass.feature.becomeorganizer.components.StepConnector
  * Invites the user to upload a government document (routing into the National ID
  * upload flow) and explains why verification is required. Continue stays
  * disabled until [identityVerified]; tapping it early surfaces an inline error
- * (matches iOS reference IMG_2784/IMG_2785).
+ * (matches design reference IMG_2784/IMG_2785).
  */
 @Composable
 fun IdentityVerificationScreen(

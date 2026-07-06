@@ -44,13 +44,13 @@ import com.eventpass.core.design.tokens.softShadow
 enum class TicketStatus { Active, Expired }
 
 /**
- * Stateless card for a purchased ticket, matching the iOS reference (IMG_2770):
- *  - Top status strip (orange for Active, gray for Expired) with a status label
- *  - Title row
- *  - Ticket-type / price two-column
- *  - Divider
- *  - Date + venue meta rows
- *  - Leading Share pill and trailing chevron
+ * Stateless card for a purchased ticket, matching the design reference (IMG_2770):
+ * - Top status strip (orange for Active, gray for Expired) with a status label
+ * - Title row
+ * - Ticket-type / price two-column
+ * - Divider
+ * - Date + venue meta rows
+ * - Leading Share pill and trailing chevron
  */
 @Composable
 fun TicketCard(

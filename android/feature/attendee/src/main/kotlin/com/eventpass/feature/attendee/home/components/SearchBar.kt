@@ -38,8 +38,8 @@ import com.eventpass.core.design.tokens.softShadow
 
 /**
  * Inline search bar. Replaces [HomeHeader] while search is active:
- *   [🔍  query…  (×) ]   [ X ]
- *         ↑ clear inline     ↑ cancel whole search
+ * [🔍  query…  (×) ]   [ X ]
+ * ↑ clear inline     ↑ cancel whole search
  *
  * Auto-focuses on first composition so the keyboard opens immediately.
  */

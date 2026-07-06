@@ -18,9 +18,8 @@ import java.time.LocalDateTime
 
 /**
  * Header bar with date, greeting, and notification badge.
- * Migrated from iOS UI/Components/HeaderBar.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - HStack → Row
  * - VStack → Column
  * - .accessibilityElement(children: .combine) → semantics block

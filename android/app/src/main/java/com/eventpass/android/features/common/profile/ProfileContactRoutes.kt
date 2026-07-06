@@ -79,7 +79,7 @@ fun ChangeEmailRoute(
         onConfirmPasswordChange = { confirmPassword = it },
         onCancel = onCancel,
         onUpdate = {
-            // TODO: submit email change + trigger verification link
+            viewModel.changeEmail(newEmail)
             onUpdated()
         }
     )
@@ -88,7 +88,8 @@ fun ChangeEmailRoute(
 @Composable
 fun AddPhoneRoute(
     onCancel: () -> Unit,
-    onAdded: () -> Unit
+    onAdded: () -> Unit,
+    viewModel: ProfileContactViewModel = hiltViewModel()
 ) {
     var phone by rememberSaveable { mutableStateOf("") }
     val canAdd = phone.filter { it.isDigit() }.length >= 9
@@ -99,7 +100,8 @@ fun AddPhoneRoute(
         onPhoneChange = { phone = it },
         onCancel = onCancel,
         onAdd = {
-            // TODO: register phone + route into SMS verification
+            // Register the phone (unverified), then route into SMS verification.
+            viewModel.addPhone(phone)
             onAdded()
         }
     )
@@ -111,13 +113,16 @@ fun EmailVerificationRoute(
     viewModel: ProfileContactViewModel = hiltViewModel()
 ) {
     val user by viewModel.currentUser.collectAsState()
+    val isVerified = user?.isEmailVerified == true
 
     EmailVerificationScreen(
         email = user?.email ?: "your email",
         onDone = onDone,
         onSendVerification = {
-            // TODO: send verification email via auth repository
-        }
+            // Mock: sending the link auto-confirms it.
+            viewModel.verifyEmail()
+        },
+        emailVerified = isVerified
     )
 }
 
@@ -156,7 +161,8 @@ fun NationalIdVerificationRoute(
         },
         onCancel = onCancel,
         onSubmit = {
-            // TODO: upload document + submit for verification
+            // Mock: submitting the document marks the user identity-verified.
+            viewModel.submitIdentity(documentNumber)
             onSubmitted()
         }
     )
@@ -180,15 +186,16 @@ fun VerifyPhoneRoute(
         onCodeChange = { code = it },
         onCancel = onCancel,
         onSendCode = {
-            // TODO: request SMS code via auth repository
+            // Mock: pretend the SMS was sent.
             codeSent = true
         },
         onVerifyCode = {
-            // TODO: verify SMS code
+            // Mock: accept any 6-digit code and mark the phone verified.
+            viewModel.verifyPhone()
             onVerified()
         },
         onResendCode = {
-            // TODO: re-request SMS code
+            // Mock: re-send is a no-op.
         }
     )
 }

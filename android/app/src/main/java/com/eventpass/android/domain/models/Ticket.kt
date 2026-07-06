@@ -6,7 +6,6 @@ import java.util.UUID
 
 /**
  * Ticket model.
- * Migrated from iOS Domain/Models/Ticket.swift
  */
 data class Ticket(
     val id: String = UUID.randomUUID().toString(),
@@ -93,7 +92,6 @@ enum class TicketScanStatus {
 
 /**
  * Ticket type model.
- * Migrated from iOS Domain/Models/TicketType.swift
  */
 data class TicketType(
     val id: String = UUID.randomUUID().toString(),

@@ -19,7 +19,7 @@ import com.eventpass.core.design.tokens.EventPassColors
 
 /**
  * Node-and-connector step indicator used at the top of the Become-an-Organizer
- * flow (matches iOS reference IMG_2776 / IMG_2784).
+ * flow (matches design reference IMG_2776 / IMG_2784).
  *
  * Past steps render as a filled orange dot with a white check; the current step
  * is a larger soft-orange dot; upcoming steps are small grey dots. The rail

@@ -18,9 +18,8 @@ import javax.inject.Inject
 
 /**
  * ViewModel for Organizer Analytics Dashboard.
- * Migrated from iOS Features/Organizer/OrganizerAnalyticsDashboardViewModel.swift
  *
- * SwiftUI → Compose state mapping:
+ * State mapping:
  * - @Published var analytics → StateFlow<UiState<OrganizerAnalytics>>
  * - @Published var selectedTimeRange → Included in UI state
  */

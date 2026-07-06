@@ -17,7 +17,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 /**
  * Extensions for collecting state in Compose with lifecycle awareness.
  *
- * SwiftUI → Compose state collection mapping:
+ * State-collection mapping:
  * - .onReceive(publisher) → collectAsStateWithLifecycle
  * - @ObservedObject → collectAsState
  * - @EnvironmentObject → CompositionLocal + collectAsState

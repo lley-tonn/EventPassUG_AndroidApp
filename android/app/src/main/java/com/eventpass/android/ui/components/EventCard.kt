@@ -61,9 +61,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Event card component.
- * Migrated from iOS UI/Components/EventCard.swift
  *
- * SwiftUI → Compose mapping used:
+ * Mapping used:
  * - VStack → Column
  * - HStack → Row
  * - ZStack → Box
@@ -308,7 +307,6 @@ fun HappeningNowBadge(
 
 /**
  * Animated like button with scale animation.
- * Migrated from iOS UI/Components/AnimatedLikeButton.swift
  */
 @Composable
 fun AnimatedLikeButton(
@@ -348,7 +346,6 @@ fun AnimatedLikeButton(
 
 /**
  * Pulsing dot animation.
- * Migrated from iOS UI/Components/PulsingDot.swift
  */
 @Composable
 fun PulsingDot(

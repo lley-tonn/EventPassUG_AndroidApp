@@ -61,7 +61,7 @@ import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.Executors
 
 /**
- * Scan Ticket (iOS reference IMG_2808). A full-screen camera viewfinder with a
+ * Scan Ticket (design reference IMG_2808). A full-screen camera viewfinder with a
  * framing overlay that detects a QR code and reports its value once via
  * [onScanned]. Requests the camera permission on entry.
  */

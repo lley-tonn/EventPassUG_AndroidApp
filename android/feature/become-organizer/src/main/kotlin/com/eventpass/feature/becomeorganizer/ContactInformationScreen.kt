@@ -48,7 +48,7 @@ data class ContactInformationState(
  * "Become an Organizer" — Step 3 of 5: Contact Information.
  *
  * Toggles to reuse the account email/phone publicly, plus optional brand and
- * social handles. Continue requires a brand/organization name (matches iOS
+ * social handles. Continue requires a brand/organization name (matches
  * reference IMG_2788/IMG_2789).
  */
 @Composable

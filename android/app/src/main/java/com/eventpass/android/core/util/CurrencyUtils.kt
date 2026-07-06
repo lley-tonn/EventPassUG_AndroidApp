@@ -5,7 +5,6 @@ import java.util.Locale
 
 /**
  * Currency utilities.
- * Migrated from iOS utility functions for currency formatting.
  */
 object CurrencyUtils {
 

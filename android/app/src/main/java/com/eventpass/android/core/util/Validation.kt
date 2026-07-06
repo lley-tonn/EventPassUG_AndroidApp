@@ -2,7 +2,6 @@ package com.eventpass.android.core.util
 
 /**
  * Validation utilities.
- * Migrated from iOS Core/Utilities/Validation.swift
  */
 object Validation {
 

@@ -52,7 +52,7 @@ data class NationalIdVerificationState(
 )
 
 /**
- * National ID / Passport verification sheet (iOS reference IMG_2786/IMG_2787).
+ * National ID / Passport verification sheet (design reference IMG_2786/IMG_2787).
  *
  * Reached from the organizer identity step and from Profile → Verify National
  * ID. Collects the document type, holder name, document number and photos.

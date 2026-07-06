@@ -7,9 +7,8 @@ import androidx.compose.animation.core.tween
 
 /**
  * Animation specifications.
- * Migrated from iOS AppDesignSystem.swift Animation struct
  *
- * SwiftUI Animation → Compose AnimationSpec mapping:
+ * Animation mapping:
  * - .easeInOut(duration:) → tween(durationMillis, easing = FastOutSlowInEasing)
  * - .spring(response:, dampingFraction:) → spring(dampingRatio, stiffness)
  */

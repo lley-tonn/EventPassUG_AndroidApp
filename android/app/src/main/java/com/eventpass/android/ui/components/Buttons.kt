@@ -26,9 +26,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Primary button component.
- * Migrated from iOS button styles.
  *
- * SwiftUI Button modifiers → Compose Button parameters:
+ * Button parameters:
  * - .buttonStyle(.borderedProminent) → Button with filled style
  * - .frame(height:) → Modifier.height()
  * - .cornerRadius() → shape = RoundedCornerShape()

@@ -37,7 +37,7 @@ import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * Create Event — Step 1: Details (iOS reference IMG_2801/2802/2803). Poster,
+ * Create Event — Step 1: Details (design reference IMG_2801/2802/2803). Poster,
  * title, description, category, start/end date-time, and venue/address/city.
  */
 @Composable

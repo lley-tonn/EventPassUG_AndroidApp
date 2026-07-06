@@ -22,9 +22,8 @@ import javax.inject.Inject
 
 /**
  * ViewModel for Attendee Home Screen with personalized recommendations.
- * Migrated from iOS Features/Attendee/AttendeeHomeViewModel.swift
  *
- * SwiftUI → Compose state mapping:
+ * State mapping:
  * - @Published private(set) var events → StateFlow<List<Event>>
  * - @MainActor → viewModelScope (main-safe coroutines)
  * - Combine subscribers → Flow.combine + stateIn

@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Cancellation system models.
- * Migrated from iOS Domain/Models/CancellationModels.swift
  *
  * Comprehensive event cancellation models for fintech-grade reliability.
  * Ensures all paid tickets are compensated and states remain consistent.

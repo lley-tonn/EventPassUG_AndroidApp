@@ -75,11 +75,12 @@ data class ProfileHeaderData(
     val isPhoneVerified: Boolean = false,
     val isVerifiedOrganizer: Boolean = false,
     val verifiedOnText: String? = null,
-    val switchRoleTargetLabel: String? = null
+    val switchRoleTargetLabel: String? = null,
+    val isSignedIn: Boolean = true
 )
 
 /**
- * Profile screen — matches iOS reference (IMG_2774, IMG_2775).
+ * Profile screen — matches design reference (IMG_2774, IMG_2775).
  *
  * Stateless: caller owns identity + version state and supplies callbacks for
  * each row. Empty contact fields (`email == null` / `phoneNumber == null`)
@@ -285,14 +286,25 @@ fun ProfileScreen(
         Spacer(Modifier.height(Spacing.sm))
 
         GroupedCard {
-            ProfileRow(
-                icon = Icons.AutoMirrored.Filled.Login,
-                title = "Sign Out",
-                onClick = onSignOut,
-                iconTint = EventPassColors.Error,
-                titleColor = EventPassColors.Error,
-                trailing = ProfileRowTrailing.IconOnly(Icons.AutoMirrored.Filled.ExitToApp)
-            )
+            if (data.isSignedIn) {
+                ProfileRow(
+                    icon = Icons.AutoMirrored.Filled.Login,
+                    title = "Sign Out",
+                    onClick = onSignOut,
+                    iconTint = EventPassColors.Error,
+                    titleColor = EventPassColors.Error,
+                    trailing = ProfileRowTrailing.IconOnly(Icons.AutoMirrored.Filled.ExitToApp)
+                )
+            } else {
+                ProfileRow(
+                    icon = Icons.AutoMirrored.Filled.Login,
+                    title = "Sign In",
+                    onClick = onSignOut,
+                    iconTint = EventPassColors.Primary,
+                    titleColor = EventPassColors.Primary,
+                    trailing = ProfileRowTrailing.Chevron
+                )
+            }
         }
     }
 }

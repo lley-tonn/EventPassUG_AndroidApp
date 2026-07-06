@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -202,7 +203,8 @@ fun EventPassNavHost(
             BecomeOrganizerScreen(
                 onCancel = { navController.popBackStack() },
                 onVerifyEmail = { navController.navigate(NavRoutes.EmailVerification.route) },
-                onVerifyPhone = { navController.navigate(NavRoutes.VerifyPhone.route) },
+                // No number yet during onboarding — collect it, then verify.
+                onVerifyPhone = { navController.navigate(NavRoutes.AddPhone.route) },
                 onAddPhoto = { navController.navigate(NavRoutes.EditProfile.route) },
                 onContinue = { navController.navigate(NavRoutes.BecomeOrganizerIdentity.route) }
             )
@@ -250,7 +252,8 @@ fun EventPassNavHost(
                 },
                 onBack = { navController.popBackStack() },
                 onComplete = {
-                    // TODO: submit organizer application + switch to organizer role
+                    // The wrapper promotes the user to a verified organizer and sets a
+                    // one-shot signal so the tabs land on Dashboard on return.
                     navController.popBackStack(NavRoutes.BecomeOrganizer.route, inclusive = true)
                 }
             )
@@ -363,9 +366,32 @@ fun MainTabsScreen(
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     val tabNavController = rememberNavController()
+    // Consumed once when this tab host is (re)created — e.g. after becoming an organizer.
+    val startTab = remember { profileViewModel.consumePendingStartTab() }
+    val tabStartDestination = if (startTab == "dashboard") "tab_dashboard" else "tab_home"
 
     val user by profileViewModel.currentUser.collectAsState()
     val isOrganizer = user?.currentActiveRole == UserRole.ORGANIZER
+    val isSignedIn = user != null
+
+    // Sign-in gate: guest-protected actions surface this prompt instead of navigating.
+    var signInPromptMessage by remember { mutableStateOf<String?>(null) }
+    fun requireAuth(message: String, action: () -> Unit) {
+        if (isSignedIn) action() else signInPromptMessage = message
+    }
+
+    // When the user becomes (or switches to) an organizer, jump to the Dashboard tab.
+    var wasOrganizer by remember { mutableStateOf(isOrganizer) }
+    LaunchedEffect(isOrganizer) {
+        if (isOrganizer && !wasOrganizer) {
+            tabNavController.navigate("tab_dashboard") {
+                popUpTo(tabNavController.graph.findStartDestination().id) { saveState = true }
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+        wasOrganizer = isOrganizer
+    }
 
     // Middle tab is role-aware: Dashboard for organizers, Tickets for attendees.
     val middleItem = if (isOrganizer) {
@@ -419,12 +445,20 @@ fun MainTabsScreen(
                         label = { Text(item.label) },
                         selected = selected,
                         onClick = {
-                            tabNavController.navigate(item.route) {
-                                popUpTo(tabNavController.graph.findStartDestination().id) {
-                                    saveState = true
+                            val navigateToTab = {
+                                tabNavController.navigate(item.route) {
+                                    popUpTo(tabNavController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
+                            }
+                            // The Tickets tab is sign-in protected for guests.
+                            if (item.route == "tab_tickets") {
+                                requireAuth("Sign in to view your tickets.", navigateToTab)
+                            } else {
+                                navigateToTab()
                             }
                         }
                     )
@@ -434,7 +468,7 @@ fun MainTabsScreen(
     ) { innerPadding ->
         NavHost(
             navController = tabNavController,
-            startDestination = "tab_home",
+            startDestination = tabStartDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable("tab_home") {
@@ -477,13 +511,19 @@ fun MainTabsScreen(
             composable("tab_profile") {
                 ProfileScreen(
                     onEditProfile = {
-                        rootNavController.navigate(NavRoutes.EditProfile.route)
+                        requireAuth("Sign in to edit your profile.") {
+                            rootNavController.navigate(NavRoutes.EditProfile.route)
+                        }
                     },
                     onBecomeOrganizer = {
-                        rootNavController.navigate(NavRoutes.BecomeOrganizer.route)
+                        requireAuth("Sign in to become an organizer.") {
+                            rootNavController.navigate(NavRoutes.BecomeOrganizer.route)
+                        }
                     },
                     onVerifyNationalId = {
-                        rootNavController.navigate(NavRoutes.NationalIDVerification.route)
+                        requireAuth("Sign in to verify your identity.") {
+                            rootNavController.navigate(NavRoutes.NationalIDVerification.route)
+                        }
                     },
                     onSignOut = {
                         // Navigate back to auth choice
@@ -494,5 +534,18 @@ fun MainTabsScreen(
                 )
             }
         }
+    }
+
+    signInPromptMessage?.let { message ->
+        SignInRequiredDialog(
+            message = message,
+            onSignIn = {
+                signInPromptMessage = null
+                rootNavController.navigate(AuthRoutes.CHOICE) {
+                    popUpTo(NavRoutes.MainTabs.route) { inclusive = true }
+                }
+            },
+            onDismiss = { signInPromptMessage = null }
+        )
     }
 }

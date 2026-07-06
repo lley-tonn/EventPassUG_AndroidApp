@@ -66,7 +66,7 @@ private val defaultFilters = listOf(
 )
 
 /**
- * Search (iOS reference IMG_2824). A prominent search field, a scrollable rail
+ * Search (design reference IMG_2824). A prominent search field, a scrollable rail
  * of quick filters, and event results. Stateless — the caller owns [query] and
  * supplies results.
  */

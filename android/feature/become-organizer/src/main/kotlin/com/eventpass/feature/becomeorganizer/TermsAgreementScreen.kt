@@ -79,7 +79,7 @@ private val termSections = listOf(
  *
  * Expandable summaries of the organizer terms plus a required agreement
  * checkbox. Complete Registration stays disabled until [agreed]; tapping it
- * early surfaces an inline error (matches iOS reference IMG_2792/IMG_2793).
+ * early surfaces an inline error (matches design reference IMG_2792/IMG_2793).
  */
 @Composable
 fun TermsAgreementScreen(

@@ -15,9 +15,8 @@ import javax.inject.Inject
 
 /**
  * Authentication ViewModel.
- * Migrated from iOS Features/Auth/AuthViewModel.swift
  *
- * SwiftUI → Compose state mapping:
+ * State mapping:
  * - @Published → StateFlow
  * - @State → MutableState (in Composable) or StateFlow (in ViewModel)
  */

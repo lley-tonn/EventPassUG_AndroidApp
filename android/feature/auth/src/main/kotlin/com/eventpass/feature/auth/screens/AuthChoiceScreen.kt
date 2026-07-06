@@ -46,13 +46,13 @@ import com.eventpass.core.design.tokens.softShadow
 import androidx.compose.foundation.clickable
 
 /**
- * Post-onboarding entry screen. Matches iOS reference IMG_2756.
+ * Post-onboarding entry screen. Matches design reference IMG_2756.
  *
  * Three choices:
- *   1. Sign In — quiet card with halo person icon + chevron
- *   2. Host Your Own Events — loud orange-gradient hero card (attendees still tap to
- *      continue; this is just an emphasis choice mirroring iOS)
- *   3. Browse Events — quiet card for guest mode
+ * 1. Sign In — quiet card with halo person icon + chevron
+ * 2. Host Your Own Events — loud orange-gradient hero card (attendees still tap to
+ * continue; this is just an emphasis choice mirroring the design)
+ * 3. Browse Events — quiet card for guest mode
  */
 @Composable
 fun AuthChoiceScreen(

@@ -9,7 +9,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 /**
  * QR Code generator utility.
- * Migrated from iOS Core/Utilities/QRCodeGenerator.swift
  *
  * Uses ZXing library for QR code generation.
  */

@@ -163,7 +163,8 @@ fun BecomeOrganizerPayoutScreen(
 fun BecomeOrganizerTermsScreen(
     onCancel: () -> Unit,
     onBack: () -> Unit = {},
-    onComplete: () -> Unit = {}
+    onComplete: () -> Unit = {},
+    viewModel: BecomeOrganizerViewModel = hiltViewModel()
 ) {
     var agreed by rememberSaveable { mutableStateOf(false) }
 
@@ -172,7 +173,12 @@ fun BecomeOrganizerTermsScreen(
         onAgreedChange = { agreed = it },
         onCancel = onCancel,
         onBack = onBack,
-        onComplete = onComplete
+        onComplete = {
+            // Promote to verified organizer, then let navigation return to the
+            // tabs (which switch to the organizer set + Dashboard).
+            viewModel.completeOrganizerRegistration()
+            onComplete()
+        }
     )
 }
 

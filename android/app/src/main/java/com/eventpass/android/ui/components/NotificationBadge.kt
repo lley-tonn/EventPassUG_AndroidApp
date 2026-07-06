@@ -37,9 +37,8 @@ import kotlinx.coroutines.delay
 
 /**
  * Notification badge with animated bounce effect.
- * Migrated from iOS UI/Components/NotificationBadge.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - @State private var isBouncing → remember { mutableStateOf }
  * - .scaleEffect() → Modifier.scale()
  * - .onChange(of:) → LaunchedEffect with key

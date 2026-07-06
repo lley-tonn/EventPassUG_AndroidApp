@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.SharedFlow
 
 /**
  * Cancellation repository protocol.
- * Migrated from iOS Data/Repositories/CancellationRepository.swift
  *
  * Event cancellation service with full refund integration and automation.
  * Designed for fintech-grade reliability and complete audit trail.

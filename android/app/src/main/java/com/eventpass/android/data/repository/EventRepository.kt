@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Event repository interface.
- * Mirrors iOS EventRepository protocol.
  */
 interface EventRepository {
 

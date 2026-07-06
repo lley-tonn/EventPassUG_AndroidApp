@@ -16,7 +16,7 @@ import androidx.compose.material.icons.filled.TheaterComedy
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
- * Interests the user selects during onboarding. Matches the iOS reference (IMG_2753):
+ * Interests the user selects during onboarding. Matches the design reference (IMG_2753):
  * Music · Festivals · Concerts · Nightlife · Sports · Arts & Culture · Comedy
  * Food & Drinks · Networking · Technology · Education · Wellness.
  */

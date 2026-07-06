@@ -13,7 +13,6 @@ import javax.inject.Singleton
 
 /**
  * Mock implementation of CancellationRepository.
- * Migrated from iOS MockCancellationRepository.
  */
 @Singleton
 class CancellationRepositoryImpl @Inject constructor(

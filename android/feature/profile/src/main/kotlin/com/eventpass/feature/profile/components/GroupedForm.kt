@@ -39,7 +39,7 @@ fun FormSectionLabel(text: String, modifier: Modifier = Modifier) {
 }
 
 /**
- * White rounded card that groups form rows (iOS inset-grouped style).
+ * White rounded card that groups form rows (inset-grouped style).
  */
 @Composable
 fun FormCard(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
@@ -69,7 +69,7 @@ fun FormDivider() {
 
 /**
  * Borderless inset text field used inside grouped cards. Shows [placeholder]
- * when empty. Height and horizontal padding match the iOS list rows.
+ * when empty. Height and horizontal padding match the list rows.
  */
 @Composable
 fun InsetTextField(

@@ -4,7 +4,6 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Design system dimensions.
- * Migrated from iOS AppDesignSystem.swift
  */
 object EventPassDimensions {
 

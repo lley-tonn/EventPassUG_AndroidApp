@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 /**
  * RefundViewModel.
- * Migrated from iOS pattern for refund management.
  *
  * ViewModel for refund request and management.
  */

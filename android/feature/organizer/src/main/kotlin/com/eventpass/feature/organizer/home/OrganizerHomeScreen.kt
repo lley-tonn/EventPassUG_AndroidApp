@@ -61,7 +61,7 @@ enum class EventStatusTab(val label: String) {
 }
 
 /**
- * Organizer Home (iOS reference IMG_2800 / IMG_2809). A greeting header, the
+ * Organizer Home (design reference IMG_2800 / IMG_2809). A greeting header, the
  * primary "Create New Event" CTA, status filter pills with counts, and either
  * the filtered event list or an empty state.
  */

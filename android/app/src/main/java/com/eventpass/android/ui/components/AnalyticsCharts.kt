@@ -49,9 +49,8 @@ import java.util.UUID
 
 /**
  * Analytics chart components.
- * Migrated from iOS UI/Components/AnalyticsCharts.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - Shape → Canvas with drawArc/drawPath
  * - GeometryReader → BoxWithConstraints or Modifier.fillMaxWidth
  * - animatableData → animateFloatAsState

@@ -39,9 +39,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Compact profile header with avatar, name, followers, and role.
- * Migrated from iOS UI/Components/ProfileHeaderView.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - @ViewBuilder → @Composable
  * - HStack/VStack → Row/Column
  * - Image(systemName:) → Icon

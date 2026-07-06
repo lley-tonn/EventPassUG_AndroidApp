@@ -23,7 +23,7 @@ import com.eventpass.feature.onboarding.components.OnboardingScaffold
 import com.eventpass.feature.onboarding.model.InterestCategory
 
 /**
- * Step 4/6 — pick favorite event categories. Matches iOS IMG_2753.
+ * Step 4/6 — pick favorite event categories. Matches IMG_2753.
  * Count of selected is rendered in orange above the chip grid.
  */
 @OptIn(ExperimentalLayoutApi::class)

@@ -39,7 +39,7 @@ import com.eventpass.feature.onboarding.components.OnboardingScaffold
 import com.eventpass.feature.onboarding.model.Role
 
 /**
- * Step 2/6 — pick Attendee or Organizer. Matches iOS IMG_2751.
+ * Step 2/6 — pick Attendee or Organizer. Matches IMG_2751.
  * Two large tappable cards, each with a halo icon and radio indicator at the bottom.
  */
 @Composable

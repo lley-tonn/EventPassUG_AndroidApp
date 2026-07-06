@@ -33,7 +33,7 @@ import com.eventpass.feature.profile.components.CenteredFlowScaffold
 private const val CODE_LENGTH = 6
 
 /**
- * "Verify Phone Number" sheet (iOS reference IMG_2782 / IMG_2783).
+ * "Verify Phone Number" sheet (design reference IMG_2782 / IMG_2783).
  *
  * A single screen with two phases driven by [codeSent]: first offer to send a
  * 6-digit SMS code, then collect and verify it. [code] is hoisted so the caller

@@ -23,7 +23,7 @@ import com.eventpass.core.design.tokens.EventPassColors
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * Attendee home header — the iOS layout has a small date label above a big
+ * Attendee home header — the layout has a small date label above a big
  * greeting, with three circular icon bubbles (Search, Favorites, Notifications)
  * on the right. The bell shows an unread-count badge.
  */

@@ -66,7 +66,7 @@ private val PayoutMethod.providerName: String
  *
  * Pick a payout method (MTN / Airtel / Bank) and provide the matching account
  * details. Continue enables once the selected method has usable details
- * (matches iOS reference IMG_2790/IMG_2791).
+ * (matches design reference IMG_2790/IMG_2791).
  */
 @Composable
 fun PayoutSetupScreen(

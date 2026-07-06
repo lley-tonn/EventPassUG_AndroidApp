@@ -87,7 +87,8 @@ private fun User?.toHeaderData(): ProfileHeaderData {
         isPhoneVerified = u?.isPhoneVerified == true,
         isVerifiedOrganizer = u?.isVerifiedOrganizer == true,
         verifiedOnText = u?.verificationDate?.format(verifiedDateFormatter),
-        switchRoleTargetLabel = switchTarget?.let { "To ${it.toLabel()}" }
+        switchRoleTargetLabel = switchTarget?.let { "To ${it.toLabel()}" },
+        isSignedIn = u != null
     )
 }
 

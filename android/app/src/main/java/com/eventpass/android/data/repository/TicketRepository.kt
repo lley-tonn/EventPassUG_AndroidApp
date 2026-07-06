@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Ticket repository interface.
- * Mirrors iOS TicketRepository protocol.
  */
 interface TicketRepository {
 

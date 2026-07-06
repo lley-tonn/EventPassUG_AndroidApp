@@ -43,9 +43,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Compact metric card for dashboard statistics.
- * Migrated from iOS UI/Components/DashboardComponents.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - HStack → Row
  * - Image(systemName:) → Icon with ImageVector
  * - .subtleShadow() → Card with elevation

@@ -39,7 +39,7 @@ import com.eventpass.feature.profile.components.InsetTextField
 import com.eventpass.feature.profile.components.ModalTopBar
 
 /**
- * "Edit Profile" sheet (iOS reference IMG_2779).
+ * "Edit Profile" sheet (design reference IMG_2779).
  *
  * Stateless — the caller owns first/last name edit state and the contact
  * values. [canSave] drives the Save pill; contact rows push into the dedicated

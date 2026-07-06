@@ -28,9 +28,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Category tile for filtering events.
- * Migrated from iOS UI/Components/CategoryTile.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - VStack → Column
  * - Image(systemName:) → Icon with ImageVector
  * - .clipShape(Circle()) → Modifier.clip(CircleShape)

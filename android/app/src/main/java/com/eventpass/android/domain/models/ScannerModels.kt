@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Scanner device model.
- * Migrated from iOS Domain/Models/ScannerModels.swift
  *
  * CRITICAL: Scanner access is strictly event-scoped and temporary
  */

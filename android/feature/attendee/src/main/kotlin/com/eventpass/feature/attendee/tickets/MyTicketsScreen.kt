@@ -51,7 +51,7 @@ data class TicketCardData(
 )
 
 /**
- * My Tickets screen — matches iOS reference IMG_2770.
+ * My Tickets screen — matches design reference IMG_2770.
  *
  * Stateless: the caller owns [selectedFilter] + [tickets] (already filtered
  * to the active pill) and supplies the total counts for each pill badge.

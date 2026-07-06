@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 
 /**
  * EventPass Color Palette
- * Migrated from iOS AppDesignSystem.swift
  */
 object EventPassColors {
     // Primary Brand Colors

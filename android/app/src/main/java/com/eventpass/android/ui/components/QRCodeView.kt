@@ -27,7 +27,6 @@ import kotlinx.coroutines.withContext
 
 /**
  * QR code display component.
- * Migrated from iOS UI/Components/QRCodeView.swift
  *
  * Uses ZXing library for QR code generation.
  */

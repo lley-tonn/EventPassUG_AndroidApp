@@ -57,7 +57,7 @@ data class ProfileCompletionData(
  * events. Full legal name, a verified email, and a verified phone number are
  * required; a profile photo is optional. Continue stays disabled until every
  * required item is satisfied; tapping it while incomplete surfaces an inline
- * error (matches iOS reference IMG_2776/IMG_2777).
+ * error (matches design reference IMG_2776/IMG_2777).
  */
 @Composable
 fun ProfileCompletionScreen(

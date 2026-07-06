@@ -62,7 +62,7 @@ import com.eventpass.core.design.tokens.Spacing
 private val Purple = EventPassColors.OrganizerAccent
 
 /**
- * Organizer Dashboard (iOS reference IMG_2796–IMG_2799).
+ * Organizer Dashboard (design reference IMG_2796–IMG_2799).
  *
  * A long, read-only overview of the organizer's performance: health score,
  * revenue/overview tiles, marketing, operations, predictions, sales, earnings

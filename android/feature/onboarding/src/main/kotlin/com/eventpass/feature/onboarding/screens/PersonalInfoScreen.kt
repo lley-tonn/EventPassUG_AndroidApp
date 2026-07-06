@@ -47,7 +47,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 /**
- * Step 3/6 — collect full name + date of birth. Matches iOS IMG_2752.
+ * Step 3/6 — collect full name + date of birth. Matches IMG_2752.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

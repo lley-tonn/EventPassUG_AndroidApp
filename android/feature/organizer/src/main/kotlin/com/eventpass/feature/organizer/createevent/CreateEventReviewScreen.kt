@@ -32,7 +32,7 @@ import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * Create Event — Step 3: Review (iOS reference IMG_2805/2806). Read-only
+ * Create Event — Step 3: Review (design reference IMG_2805/2806). Read-only
  * summary of the event and its ticket types, with per-section Edit shortcuts
  * and the final Publish action.
  */

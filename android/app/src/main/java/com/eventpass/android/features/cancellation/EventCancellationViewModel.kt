@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 /**
  * EventCancellationViewModel.
- * Migrated from iOS Features/Cancellation/EventCancellationViewModel.swift
  *
  * ViewModel for the multi-step event cancellation flow.
  */

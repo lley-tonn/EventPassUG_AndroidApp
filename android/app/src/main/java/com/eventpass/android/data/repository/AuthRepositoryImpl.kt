@@ -41,7 +41,8 @@ class AuthRepositoryImpl @Inject constructor(
             // Simulate network delay
             delay(1000)
 
-            // Mock successful login
+            // Mock successful login — a fresh account starts unverified so the
+            // Become-an-Organizer flow (email/phone/identity checks) is exercisable.
             val user = User(
                 id = UUID.randomUUID().toString(),
                 firstName = "Test",
@@ -50,7 +51,9 @@ class AuthRepositoryImpl @Inject constructor(
                 role = UserRole.ATTENDEE,
                 phoneNumber = null,
                 profileImageUrl = null,
-                isVerified = true
+                isVerified = false,
+                isEmailVerified = false,
+                isPhoneVerified = false
             )
             _currentUser.value = user
             saveUserId(user.id)
@@ -87,7 +90,8 @@ class AuthRepositoryImpl @Inject constructor(
                 role = UserRole.ATTENDEE,
                 phoneNumber = phoneNumber,
                 profileImageUrl = null,
-                isVerified = true
+                isVerified = false,
+                isPhoneVerified = true
             )
             _currentUser.value = user
             saveUserId(user.id)
@@ -140,7 +144,8 @@ class AuthRepositoryImpl @Inject constructor(
                 role = UserRole.ATTENDEE,
                 phoneNumber = null,
                 profileImageUrl = null,
-                isVerified = true
+                isVerified = false,
+                isEmailVerified = true
             )
             _currentUser.value = user
             saveUserId(user.id)
@@ -190,6 +195,65 @@ class AuthRepositoryImpl @Inject constructor(
             Result.success(updatedUser)
         } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    override suspend fun becomeOrganizer(): Result<User> {
+        return try {
+            val user = _currentUser.value ?: return Result.failure(Exception("Not authenticated"))
+            val updatedUser = user.copy(
+                isOrganizerRole = true,
+                isVerifiedOrganizer = true,
+                isVerified = true,
+                verificationDate = java.time.LocalDateTime.now(),
+                currentActiveRole = UserRole.ORGANIZER
+            )
+            _currentUser.value = updatedUser
+            Result.success(updatedUser)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // --- Contact / identity verification (mock) --------------------------------
+
+    private fun updateCurrentUser(transform: (User) -> User): Result<User> {
+        val user = _currentUser.value ?: return Result.failure(Exception("Not authenticated"))
+        val updated = transform(user)
+        _currentUser.value = updated
+        return Result.success(updated)
+    }
+
+    override suspend fun verifyEmail(): Result<User> {
+        delay(500) // simulate sending + confirming the link
+        return updateCurrentUser { it.copy(isEmailVerified = true, pendingEmail = null) }
+    }
+
+    override suspend fun changeEmail(newEmail: String): Result<User> {
+        delay(500)
+        return updateCurrentUser { it.copy(email = newEmail, isEmailVerified = false) }
+    }
+
+    override suspend fun addPhoneNumber(phoneNumber: String): Result<User> {
+        delay(500)
+        return updateCurrentUser {
+            it.copy(phoneNumber = phoneNumber, isPhoneVerified = false, pendingPhoneNumber = null)
+        }
+    }
+
+    override suspend fun verifyPhoneNumber(): Result<User> {
+        delay(500)
+        return updateCurrentUser { it.copy(isPhoneVerified = true) }
+    }
+
+    override suspend fun submitIdentityVerification(documentNumber: String): Result<User> {
+        delay(500)
+        return updateCurrentUser {
+            it.copy(
+                isVerified = true,
+                nationalIdNumber = documentNumber,
+                verificationDate = java.time.LocalDateTime.now()
+            )
         }
     }
 

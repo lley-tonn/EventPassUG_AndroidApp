@@ -42,7 +42,7 @@ import com.eventpass.core.design.tokens.softShadow
 import com.eventpass.feature.onboarding.components.OnboardingScaffold
 
 /**
- * Step 5/6 — ask for notifications permission. Matches iOS IMG_2754.
+ * Step 5/6 — ask for notifications permission. Matches IMG_2754.
  *
  * On Android 13+ (API 33), triggers the POST_NOTIFICATIONS runtime permission dialog.
  * Below 33 notifications are granted by default — the card still lets the user acknowledge.

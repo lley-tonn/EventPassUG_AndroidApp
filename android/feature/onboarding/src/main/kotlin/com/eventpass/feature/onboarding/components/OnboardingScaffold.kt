@@ -33,7 +33,7 @@ import com.eventpass.core.design.tokens.Spacing
  * Middle: [content] (fills available space, scroll handled by caller if needed).
  * Bottom: footer with Back + primary action (usually Continue).
  *
- * [primaryEnabled] mirrors the iOS disabled-grey look when answers are missing.
+ * [primaryEnabled] mirrors the disabled-grey look when answers are missing.
  * If [onBack] is null, the Back button is hidden and the Continue spans full width.
  */
 @Composable

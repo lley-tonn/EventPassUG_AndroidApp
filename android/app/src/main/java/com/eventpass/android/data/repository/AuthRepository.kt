@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Authentication repository interface.
- * Mirrors iOS AuthRepository protocol.
  */
 interface AuthRepository {
 
@@ -72,6 +71,29 @@ interface AuthRepository {
      * Switch user role (attendee/organizer).
      */
     suspend fun switchRole(role: com.eventpass.android.domain.models.UserRole): Result<User>
+
+    /**
+     * Promote the current user to a verified organizer (completes the
+     * Become-an-Organizer flow) and activate the organizer role.
+     */
+    suspend fun becomeOrganizer(): Result<User>
+
+    // --- Contact / identity verification (mock) --------------------------------
+
+    /** Mark the current user's email as verified. */
+    suspend fun verifyEmail(): Result<User>
+
+    /** Change the current user's email (resets email-verified state). */
+    suspend fun changeEmail(newEmail: String): Result<User>
+
+    /** Attach a phone number to the current user (unverified until confirmed). */
+    suspend fun addPhoneNumber(phoneNumber: String): Result<User>
+
+    /** Mark the current user's phone number as verified. */
+    suspend fun verifyPhoneNumber(): Result<User>
+
+    /** Submit an identity document and mark the user as identity-verified. */
+    suspend fun submitIdentityVerification(documentNumber: String): Result<User>
 
     /**
      * Request password reset.

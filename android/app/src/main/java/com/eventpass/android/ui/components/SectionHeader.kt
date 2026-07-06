@@ -25,9 +25,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * App section header with title, subtitle, and optional action.
- * Migrated from iOS UI/Components/UIComponents.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - HStack/VStack → Row/Column
  * - Image(systemName:) → Icon with ImageVector
  */

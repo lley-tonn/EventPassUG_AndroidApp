@@ -26,7 +26,7 @@ import com.eventpass.feature.profile.components.FormCard
 import com.eventpass.feature.profile.components.InsetTextField
 
 /**
- * "Add Phone Number" sheet (iOS reference IMG_2780). Collects a phone number
+ * "Add Phone Number" sheet (design reference IMG_2780). Collects a phone number
  * for SMS verification; the action enables once [canAdd] is true.
  */
 @Composable

@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Notification model.
- * Migrated from iOS Domain/Models/NotificationModel.swift
  */
 data class Notification(
     val id: String = UUID.randomUUID().toString(),

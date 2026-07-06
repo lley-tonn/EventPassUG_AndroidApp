@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Organizer profile model.
- * Migrated from iOS Domain/Models/OrganizerProfile.swift
  */
 data class OrganizerProfile(
     // Public Contact Information

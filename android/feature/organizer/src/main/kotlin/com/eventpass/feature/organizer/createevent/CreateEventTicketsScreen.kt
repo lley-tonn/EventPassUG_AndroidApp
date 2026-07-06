@@ -38,7 +38,7 @@ import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * Create Event — Step 2: Tickets (iOS reference IMG_2804). A list of editable
+ * Create Event — Step 2: Tickets (design reference IMG_2804). A list of editable
  * ticket-type cards plus an "Add Ticket Type" button.
  */
 @Composable

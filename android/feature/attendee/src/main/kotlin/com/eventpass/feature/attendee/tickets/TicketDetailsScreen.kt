@@ -76,7 +76,7 @@ data class TicketDetailsData(
 )
 
 /**
- * Ticket Details — matches iOS reference (IMG_2771–IMG_2773).
+ * Ticket Details — matches design reference (IMG_2771–IMG_2773).
  *
  * Stateless: caller supplies the data record, a pre-rendered QR [ImageBitmap]
  * (rendering bitmaps in a composable would be wasteful on every recompose),

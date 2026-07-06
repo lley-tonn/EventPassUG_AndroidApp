@@ -33,7 +33,6 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Loading view with progress indicator.
- * Migrated from iOS UI/Components/LoadingView.swift
  */
 @Composable
 fun LoadingView(
@@ -66,7 +65,6 @@ fun LoadingView(
 
 /**
  * Skeleton loading placeholder with shimmer animation.
- * Migrated from iOS SkeletonEventCard
  */
 @Composable
 fun SkeletonBox(

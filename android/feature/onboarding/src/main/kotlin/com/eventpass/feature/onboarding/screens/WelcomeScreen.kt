@@ -34,7 +34,7 @@ import com.eventpass.feature.onboarding.components.OnboardingScaffold
 
 /**
  * Step 1/6 — welcome splash with the layered-halo ticket logo.
- * Matches iOS IMG_2750.
+ * Matches IMG_2750.
  */
 @Composable
 fun WelcomeScreen(

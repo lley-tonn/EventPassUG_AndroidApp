@@ -41,7 +41,7 @@ import com.eventpass.feature.onboarding.model.InterestCategory
 import com.eventpass.feature.onboarding.model.Role
 
 /**
- * Step 6/6 — confirm completion. Matches iOS IMG_2755.
+ * Step 6/6 — confirm completion. Matches IMG_2755.
  * Large green check halo, welcome line, and a summary card of what we collected.
  */
 @Composable

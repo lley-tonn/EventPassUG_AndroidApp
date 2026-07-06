@@ -49,7 +49,7 @@ data class EventCardData(
 )
 
 /**
- * Attendee home screen — matches iOS reference IMG_2757.
+ * Attendee home screen — matches design reference IMG_2757.
  *
  * Stateless: every piece of state (header meta, category rail, event list,
  * favorites, search) is hoisted to the caller.

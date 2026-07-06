@@ -2,6 +2,7 @@ package com.eventpass.android.features.common.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eventpass.android.core.navigation.TabNavSignals
 import com.eventpass.android.core.state.ActionState
 import com.eventpass.android.core.state.EventChannel
 import com.eventpass.android.core.state.UiState
@@ -26,13 +27,17 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val tabNavSignals: TabNavSignals
 ) : ViewModel() {
 
     // MARK: - State
 
     val currentUser: StateFlow<User?> = authRepository.currentUser
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
+    /** One-shot: the tab to open on (re)creation of the tab host, if requested. */
+    fun consumePendingStartTab(): String? = tabNavSignals.consumeStartTab()
 
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()

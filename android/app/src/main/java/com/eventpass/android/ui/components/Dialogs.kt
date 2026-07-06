@@ -41,9 +41,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Authentication prompt bottom sheet.
- * Migrated from iOS UI/Components/AuthPromptSheet.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - .sheet() → ModalBottomSheet
  * - NavigationStack → Direct composable with callbacks
  */

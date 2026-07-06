@@ -51,9 +51,8 @@ object PosterConfiguration {
 
 /**
  * Async poster view for remote images.
- * Migrated from iOS UI/Components/PosterView.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - AsyncImage → SubcomposeAsyncImage with Coil
  * - GeometryReader → BoxWithConstraints or aspectRatio modifier
  * - .aspectRatio() → Modifier.aspectRatio()

@@ -26,7 +26,7 @@ import com.eventpass.feature.profile.components.InsetTextField
 import com.eventpass.feature.profile.components.ModalTopBar
 
 /**
- * "Change Email" sheet (iOS reference IMG_2778).
+ * "Change Email" sheet (design reference IMG_2778).
  *
  * Shows the current email, a new-email field and a password-confirm field. The
  * Update pill enables once both fields are filled ([canUpdate]).

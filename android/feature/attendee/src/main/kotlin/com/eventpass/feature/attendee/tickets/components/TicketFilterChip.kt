@@ -31,7 +31,7 @@ import com.eventpass.core.design.tokens.Spacing
 /**
  * Pill-shaped filter chip for the My Tickets screen.
  *
- * Matches the iOS reference (IMG_2770): white fill with a 1px outline, a
+ * Matches the design reference (IMG_2770): white fill with a 1px outline, a
  * numeric badge after the label, and — when [showCheck] is true and the chip
  * is selected — a small green check circle on the leading edge. Selected state
  * swaps the outline + badge to [accent].

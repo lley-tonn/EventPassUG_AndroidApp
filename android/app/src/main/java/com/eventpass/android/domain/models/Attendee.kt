@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Attendee model.
- * Migrated from iOS Domain/Models/Attendee.swift
  *
  * Represents a ticket holder/attendee for an event.
  */
@@ -105,7 +104,7 @@ data class Attendee(
 
 /**
  * Check-in status enum.
- * Matches iOS CheckInStatus.
+ * Matches CheckInStatus.
  */
 enum class CheckInStatus(val value: String) {
     NOT_CHECKED_IN("notCheckedIn"),
@@ -122,7 +121,7 @@ enum class CheckInStatus(val value: String) {
 
 /**
  * Attendance status enum.
- * Matches iOS AttendanceStatus.
+ * Matches AttendanceStatus.
  */
 enum class AttendanceStatus(val value: String) {
     EXPECTED("expected"),

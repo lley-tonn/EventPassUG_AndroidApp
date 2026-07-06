@@ -42,9 +42,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * Styled text field.
- * Migrated from iOS UI/Components/FormInputComponents.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - TextField → BasicTextField (for custom styling) or TextField
  * - @FocusState → remember { mutableStateOf } + onFocusChanged
  * - .textInputAutocapitalization → KeyboardOptions(capitalization)

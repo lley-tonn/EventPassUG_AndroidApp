@@ -10,7 +10,6 @@ import java.io.FileOutputStream
 
 /**
  * Image utilities.
- * Migrated from iOS Core/Utilities/ImageCompressor.swift and ImageValidator.swift
  */
 object ImageUtils {
 

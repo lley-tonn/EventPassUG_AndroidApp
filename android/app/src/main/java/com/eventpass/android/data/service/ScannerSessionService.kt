@@ -14,7 +14,6 @@ import javax.inject.Singleton
 
 /**
  * Scanner Session Service Protocol.
- * Migrated from iOS Data/Services/ScannerSessionService.swift
  *
  * Service for managing BYOS scanner device pairing and sessions.
  * CRITICAL: All scanner access is event-scoped, temporary, and revocable.

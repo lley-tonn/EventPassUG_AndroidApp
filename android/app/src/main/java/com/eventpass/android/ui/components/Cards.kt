@@ -19,9 +19,8 @@ import com.eventpass.android.ui.theme.EventPassDimensions
 
 /**
  * App card component with consistent styling.
- * Migrated from iOS UI/Components/UIComponents.swift
  *
- * SwiftUI → Compose mapping:
+ * Mapping:
  * - VStack with overlay → Card with content
  * - .shadow() → CardDefaults.cardElevation
  */

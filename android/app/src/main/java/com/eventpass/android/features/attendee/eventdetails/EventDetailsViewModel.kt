@@ -21,7 +21,7 @@ import javax.inject.Inject
 /**
  * ViewModel for Event Details Screen.
  *
- * SwiftUI → Compose state mapping:
+ * State mapping:
  * - @State private var selectedTicketType → MutableStateFlow
  * - @State private var ticketQuantity → Included in UI state
  * - Navigation with .sheet() → EventChannel for one-time events

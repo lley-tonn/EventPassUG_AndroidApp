@@ -6,7 +6,6 @@ import java.time.LocalDateTime
 
 /**
  * Refund repository protocol.
- * Migrated from iOS Data/Repositories/RefundRepository.swift
  *
  * Refund service with eligibility logic, processing, and automation.
  * Designed for fintech-grade reliability and auditability.

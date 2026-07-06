@@ -7,7 +7,6 @@ import java.util.UUID
 
 /**
  * User model.
- * Migrated from iOS Domain/Models/User.swift
  */
 data class User(
     val id: String = UUID.randomUUID().toString(),

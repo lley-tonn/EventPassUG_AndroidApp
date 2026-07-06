@@ -58,7 +58,6 @@ class MockRefundProcessor @Inject constructor() : RefundProcessor {
 
 /**
  * Mock implementation of RefundRepository.
- * Migrated from iOS MockRefundRepository.
  */
 @Singleton
 class RefundRepositoryImpl @Inject constructor(

@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * AttendeeExportFilter - matches iOS AttendeeExportFilter.
+ * AttendeeExportFilter - matches AttendeeExportFilter.
  * Filters for exporting attendee lists.
  */
 enum class AttendeeExportFilter(val value: String) {
@@ -78,7 +78,6 @@ data class ExportAnalyticsEvent(
 
 /**
  * AttendeeExportService.
- * Migrated from iOS Data/Services/AttendeeExportService.swift
  *
  * Service for exporting attendee lists for a specific event.
  * CRITICAL: All exports are strictly scoped to a single eventId.
@@ -175,7 +174,6 @@ class AttendeeExportService @Inject constructor(
 
 /**
  * CSVGenerator.
- * Migrated from iOS Core/Utilities/CSVGenerator.swift
  *
  * CSV file generation utility for export functionality.
  */

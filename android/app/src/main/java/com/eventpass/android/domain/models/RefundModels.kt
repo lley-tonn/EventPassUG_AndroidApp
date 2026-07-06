@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Refund system models.
- * Migrated from iOS Domain/Models/RefundModels.swift
  *
  * Comprehensive refund system for fintech-grade reliability.
  * Supports all Uganda ticketing refund scenarios including mobile money.

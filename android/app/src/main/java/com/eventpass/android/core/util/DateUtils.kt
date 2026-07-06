@@ -8,7 +8,6 @@ import java.util.Locale
 
 /**
  * Date utilities.
- * Migrated from iOS Core/Utilities/DateUtilities.swift
  */
 object DateUtils {
 

@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * ViewModel for My Tickets Screen.
  *
- * Filtering matches the iOS reference: All / Active / Expired.
+ * Filtering matches the design reference: All / Active / Expired.
  * A ticket is Active when its event end date is still in the future; once
  * the event ends the ticket flips to Expired.
  */

@@ -7,7 +7,6 @@ import java.util.UUID
 
 /**
  * Event model.
- * Migrated from iOS Domain/Models/Event.swift
  */
 data class Event(
     val id: String = UUID.randomUUID().toString(),
@@ -187,7 +186,7 @@ data class Venue(
 
 /**
  * Event category enum.
- * Mirrors iOS EventCategory with 16 categories.
+ * Mirrors EventCategory with 16 categories.
  */
 enum class EventCategory(
     val displayName: String,

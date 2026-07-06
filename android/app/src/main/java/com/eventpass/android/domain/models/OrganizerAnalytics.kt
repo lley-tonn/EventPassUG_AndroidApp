@@ -5,7 +5,6 @@ import java.util.UUID
 
 /**
  * Comprehensive analytics model for organizer dashboard.
- * Migrated from iOS Domain/Models/OrganizerAnalytics.swift
  */
 data class OrganizerAnalytics(
     val id: String = UUID.randomUUID().toString(),
