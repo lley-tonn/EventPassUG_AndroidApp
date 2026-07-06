@@ -41,18 +41,18 @@ import com.eventpass.core.design.tokens.Spacing
 import com.eventpass.core.design.tokens.softShadow
 
 /**
- * Reusable event card matching the iOS reference (IMG_2757 onward).
+ * Reusable event card matching the design reference (IMG_2757 onward).
  *
  * Takes primitives only so `:core:design` stays free of domain-model deps —
  * callers map from their `Event` / `Ticket` / whatever into these fields.
  *
  * Layout:
- *   - 16:10 hero image (skeleton grey when [imageUrl] null) with optional
- *     "Happening now" green badge (top-left) and share button (top-right)
- *   - Title + favorite heart on one row
- *   - Calendar-icon + date row
- *   - Pin-icon + venue row
- *   - Orange price (left) + star rating pill (right)
+ * - 16:10 hero image (skeleton grey when [imageUrl] null) with optional
+ * "Happening now" green badge (top-left) and share button (top-right)
+ * - Title + favorite heart on one row
+ * - Calendar-icon + date row
+ * - Pin-icon + venue row
+ * - Orange price (left) + star rating pill (right)
  */
 @Composable
 fun EventCard(

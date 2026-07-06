@@ -34,8 +34,8 @@ fun PillChip(
     count: Int? = null
 ) {
     // Visual hierarchy:
-    //   Unselected = quiet (white fill + subtle outline + muted fg)
-    //   Selected   = loud  (brand-orange fill + white fg)
+    // Unselected = quiet (white fill + subtle outline + muted fg)
+    // Selected   = loud  (brand-orange fill + white fg)
     // This keeps the strongest visual weight reserved for the primary CTA.
     val bg by animateColorAsState(
         if (selected) EventPassColors.Primary else EventPassColors.White,

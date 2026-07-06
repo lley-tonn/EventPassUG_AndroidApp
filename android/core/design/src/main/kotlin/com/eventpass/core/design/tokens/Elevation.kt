@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- * iOS-style soft shadow. Material's default elevation looks hard on Android —
+ * soft shadow. Material's default elevation looks hard on Android —
  * we use a low-opacity ambient/spot colour and a larger radius.
  */
 @Composable

@@ -3,7 +3,7 @@ package com.eventpass.core.design.tokens
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** 4-pt spacing scale, matching the iOS layout inspector reading. */
+/** 4-pt spacing scale, matching the layout inspector reading. */
 object Spacing {
     val xxs: Dp = 2.dp
     val xs: Dp = 4.dp

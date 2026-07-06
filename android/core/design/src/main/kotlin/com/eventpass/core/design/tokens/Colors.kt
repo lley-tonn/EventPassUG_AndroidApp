@@ -3,7 +3,7 @@ package com.eventpass.core.design.tokens
 import androidx.compose.ui.graphics.Color
 
 /**
- * EventPass brand colors — derived from the iOS reference screenshots.
+ * EventPass brand colors — derived from the design reference screenshots.
  * Every hue used in the UI should resolve to one of these tokens.
  */
 object EventPassColors {
@@ -27,12 +27,12 @@ object EventPassColors {
     val Info = Color(0xFF3B82F6)
     val InfoSoft = Color(0xFFDBEAFE)
 
-    // Special badges seen in iOS
-    val HappeningNow = Color(0xFF34C759)      // iOS system green
+    // Special badges seen in the app
+    val HappeningNow = Color(0xFF34C759)      // system green
     val Premium = Color(0xFFFFD700)
     val SoldOut = Color(0xFF9CA3AF)
 
-    // Neutrals — iOS-flavoured grey ramp
+    // Neutrals — soft grey ramp
     val White = Color(0xFFFFFFFF)
     val Black = Color(0xFF000000)
     val Ink = Color(0xFF111827)               // primary text
@@ -41,7 +41,7 @@ object EventPassColors {
 
     val SurfaceLight = Color(0xFFFFFFFF)
     val SurfaceLightElevated = Color(0xFFFFFFFF)
-    val BackgroundLight = Color(0xFFF2F2F7)   // iOS systemGroupedBackground
+    val BackgroundLight = Color(0xFFF2F2F7)   // grouped background
     val DividerLight = Color(0xFFE5E7EB)
     val OutlineLight = Color(0xFFD1D5DB)
 

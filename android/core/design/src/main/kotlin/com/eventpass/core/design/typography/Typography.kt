@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
- * Typography scale mapped to the iOS reference. We read the screenshots as:
+ * Typography scale mapped to the design reference. We read the screenshots as:
  * - Big headlines ("Tell us about yourself") ≈ 32 / 40 ExtraBold
  * - Screen titles ("My Tickets") ≈ 28 / 34 Bold
  * - Section titles ≈ 20 / 28 SemiBold

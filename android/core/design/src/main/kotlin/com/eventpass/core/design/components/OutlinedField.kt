@@ -39,7 +39,7 @@ import com.eventpass.core.design.tokens.Radii
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * iOS-style labeled outlined field.
+ * labeled outlined field.
  *
  * The label sits *above* the field as light gray text (not an inset floating label),
  * matching the style used on Sign Up / Edit Profile / Become Organizer flows.

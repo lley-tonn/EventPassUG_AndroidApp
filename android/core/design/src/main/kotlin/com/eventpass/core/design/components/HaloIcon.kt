@@ -25,7 +25,7 @@ import com.eventpass.core.design.tokens.EventPassColors
 import com.eventpass.core.design.tokens.Spacing
 
 /**
- * A tinted circular "halo" around an icon, used everywhere in iOS
+ * A tinted circular "halo" around an icon, used everywhere in the app
  * (date cards, venue cards, role cards, success states, etc.).
  */
 @Composable

@@ -32,7 +32,7 @@ import com.eventpass.core.design.tokens.Spacing
 import com.eventpass.core.design.tokens.softShadow
 
 /**
- * Circular bubble icon button used in the screen headers on the iOS reference
+ * Circular bubble icon button used in the screen headers on the design reference
  * (search / favorites / notifications on Attendee Home, back / share on details screens).
  *
  * Supports an optional numeric badge (e.g. notification count).

@@ -26,7 +26,7 @@ import com.eventpass.core.design.tokens.Spacing
 data class SegmentedOption(val label: String, val count: Int? = null)
 
 /**
- * iOS-style segmented control — a rounded-pill track with a sliding selection.
+ * segmented control — a rounded-pill track with a sliding selection.
  * Used on `My Tickets` (All / Active / Expired) and Organizer Home (Published / Draft / Ongoing).
  */
 @Composable

@@ -4,7 +4,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** Corner radius tokens. iOS uses a narrow set of soft curves — 12 / 16 / 20 / 28. */
+/** Corner radius tokens. uses a narrow set of soft curves — 12 / 16 / 20 / 28. */
 object Radii {
     val xs: Dp = 8.dp
     val sm: Dp = 12.dp

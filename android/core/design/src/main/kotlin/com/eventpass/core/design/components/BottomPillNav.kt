@@ -45,7 +45,7 @@ data class BottomNavItem(
 /**
  * Floating pill-shaped bottom navigation bar used across Attendee and Organizer main flows.
  *
- * Matches iOS: a white pill floating above the content with subtle shadow,
+ * Matches a white pill floating above the content with subtle shadow,
  * selected item shows a coloured dot + tinted icon + label.
  */
 @Composable
